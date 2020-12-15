@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -55,21 +55,21 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rFLine = (RFLine)inGH.Value;
-            // Output
-            DA.SetData(0, rFLine.ToCurve());
-            DA.SetData(1, rFLine.No);
-            DA.SetData(2, rFLine.Comment);
-            DA.SetData(3, rFLine.NodeList);
-            DA.SetData(4, rFLine.Type);
-            DA.SetData(5, rFLine.RotationAngle);
-            DA.SetData(6, rFLine.RotationType);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rFLine = (RFLine)inGH.Value;
+            //// Output
+            //DA.SetData(0, rFLine.ToCurve());
+            //DA.SetData(1, rFLine.No);
+            //DA.SetData(2, rFLine.Comment);
+            //DA.SetData(3, rFLine.NodeList);
+            //DA.SetData(4, rFLine.Type);
+            //DA.SetData(5, rFLine.RotationAngle);
+            //DA.SetData(6, rFLine.RotationType);
 
         }
     }

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+
 using Parametric_FEM_Toolbox.GUI;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -64,29 +64,29 @@ namespace Parametric_FEM_Toolbox.Deprecated
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rFMember = (RFMember)inGH.Value;
-            // Output
-            DA.SetData(0, rFMember.BaseLine.ToCurve());
-            DA.SetData(1, rFMember.No);
-            DA.SetData(2, rFMember.Comment);
-            DA.SetData(3, rFMember.LineNo);
-            DA.SetData(4, rFMember.Type);
-            DA.SetData(5, rFMember.RotationAngle);
-            DA.SetData(6, rFMember.RotationType);
-            DA.SetData(7, rFMember.StartCrossSectionNo);
-            DA.SetData(8, rFMember.EndCrossSectionNo);
-            DA.SetData(9, rFMember.StartHingeNo);
-            DA.SetData(10, rFMember.EndHingeNo);
-            DA.SetData(11, rFMember.EccentricityNo);
-            DA.SetData(12, rFMember.DivisionNo);
-            DA.SetData(13, rFMember.TaperShape);
-            DA.SetData(14, rFMember.Weight);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rFMember = (RFMember)inGH.Value;
+            //// Output
+            //DA.SetData(0, rFMember.BaseLine.ToCurve());
+            //DA.SetData(1, rFMember.No);
+            //DA.SetData(2, rFMember.Comment);
+            //DA.SetData(3, rFMember.LineNo);
+            //DA.SetData(4, rFMember.Type);
+            //DA.SetData(5, rFMember.RotationAngle);
+            //DA.SetData(6, rFMember.RotationType);
+            //DA.SetData(7, rFMember.StartCrossSectionNo);
+            //DA.SetData(8, rFMember.EndCrossSectionNo);
+            //DA.SetData(9, rFMember.StartHingeNo);
+            //DA.SetData(10, rFMember.EndHingeNo);
+            //DA.SetData(11, rFMember.EccentricityNo);
+            //DA.SetData(12, rFMember.DivisionNo);
+            //DA.SetData(13, rFMember.TaperShape);
+            //DA.SetData(14, rFMember.Weight);
 
         }
     }

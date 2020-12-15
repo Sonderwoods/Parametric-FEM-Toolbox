@@ -5,9 +5,9 @@ using System.Linq;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.Utilities;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Grasshopper.Kernel.Parameters;

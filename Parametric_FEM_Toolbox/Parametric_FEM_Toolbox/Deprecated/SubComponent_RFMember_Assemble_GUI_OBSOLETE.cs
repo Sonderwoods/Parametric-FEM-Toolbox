@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -50,9 +50,10 @@ namespace Parametric_FEM_Toolbox.GUI
             gH_ExtendableMenu.Name = "Advanced";
             gH_ExtendableMenu.Collapse();
             unit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Number", GH_ParamAccess.item);
+            unit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Number", GH_ParamAccess.item);
             unit.Inputs[4].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Member Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(MemberType)), GH_ParamAccess.item);
-            unit.Inputs[5].EnumInput = UtilLibrary.ListRFTypes(typeof(MemberType));
+           // unit.RegisterInputParam(new Param_Integer(), "Member Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(MemberType)), GH_ParamAccess.item);
+            //unit.Inputs[5].EnumInput = UtilLibrary.ListRFTypes(typeof(MemberType));
             unit.Inputs[5].Parameter.Optional = true;
             unit.RegisterInputParam(new Param_Number(), "Rotation Angle [°]", "β", "Rotation Angle [°]", GH_ParamAccess.item);
             unit.Inputs[6].Parameter.Optional = true;
@@ -67,9 +68,10 @@ namespace Parametric_FEM_Toolbox.GUI
             unit.RegisterInputParam(new Param_Integer(), "Eccentricity", "Ecc", "Number of Eccentricity", GH_ParamAccess.item);
             unit.Inputs[10].Parameter.Optional = true;
             unit.RegisterInputParam(new Param_Integer(), "Division", "Div", "Number of Division", GH_ParamAccess.item);
+            unit.RegisterInputParam(new Param_Integer(), "Division", "Div", "Number of Division", GH_ParamAccess.item);
             unit.Inputs[11].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Taper Shape", "Taper", UtilLibrary.DescriptionRFTypes(typeof(TaperShapeType)), GH_ParamAccess.item);
-            unit.Inputs[12].EnumInput = UtilLibrary.ListRFTypes(typeof(TaperShapeType));
+            //unit.RegisterInputParam(new Param_Integer(), "Taper Shape", "Taper", UtilLibrary.DescriptionRFTypes(typeof(TaperShapeType)), GH_ParamAccess.item);
+            //unit.Inputs[12].EnumInput = UtilLibrary.ListRFTypes(typeof(TaperShapeType));
             unit.Inputs[12].Parameter.Optional = true;
             unit.RegisterInputParam(new Param_Number(), "FactorY", "Kcr,y", "Effective length factor Kcr,y", GH_ParamAccess.item);
             gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[4]);
@@ -104,126 +106,126 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rFMember = new RFMember();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var lineNo = 0;
-            var memberType = 0;
-            var taperType = 0;
-            var rotAngle = 0.0;
-            //var intPoints = 4;
-            var sCS = 0;
-            var eCS = 0;
-            var sH = 0;
-            var eH = 0;
-            var ecc = 0;
-            var div = 0;
+        //    //var line = new LineCurve();
+        //    Curve inCurve = null;
+        //    var noIndex = 0;
+        //    var comment = "";
+        //    var rFMember = new RFMember();
+        //    var inRFEM = new GH_RFEM();
+        //    var mod = false;
+        //    var del = false;
+        //    var lineNo = 0;
+        //    var memberType = 0;
+        //    var taperType = 0;
+        //    var rotAngle = 0.0;
+        //    //var intPoints = 4;
+        //    var sCS = 0;
+        //    var eCS = 0;
+        //    var sH = 0;
+        //    var eH = 0;
+        //    var ecc = 0;
+        //    var div = 0;
 
-            //int newNo = 0;
+        //    //int newNo = 0;
 
-            if (DA.GetData(15, ref inRFEM))
-            {
-                rFMember = new RFMember((RFMember)inRFEM.Value);
-                if (DA.GetData(1, ref sCS))
-                {
-                    rFMember.StartCrossSectionNo = sCS;
-                }
-                if (DA.GetData(0, ref inCurve))
-                {
-                    var myRFLine = new RFLine();
-                    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                    rFMember.SetFrames();
-                }
-                if (DA.GetData(1, ref sCS))
-                {
-                    rFMember.StartCrossSectionNo = sCS;
-                }
-            }
-            else if (DA.GetData(0, ref inCurve) && DA.GetData(1, ref sCS))
-            {
-                var myRFLine = new RFLine();
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                rFMember.BaseLine = myRFLine;
-                rFMember.SetFrames();                
-                rFMember.StartCrossSectionNo = sCS;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Input Curve and Start Cross Section or existing RFMember Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-            return;
-        }
-            if (DA.GetData(16, ref mod))
-            {
-                rFMember.ToModify = mod;
-            }
-            if (DA.GetData(17, ref del))
-            {
-                rFMember.ToDelete = del;
-            }
-            if (DA.GetData(2, ref noIndex))
-            {
-                rFMember.No = noIndex;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rFMember.Comment = comment;
-            }
-            if (DA.GetData(4, ref lineNo))
-            {
-                rFMember.LineNo = lineNo;
-            }
-            if (DA.GetData(5, ref memberType))
-            {
-                rFMember.Type = (MemberType)memberType;
-                if (rFMember.Type == MemberType.UnknownMemberType)
-                {
-                    msg = "Member Type not supported. ";
-                    level = GH_RuntimeMessageLevel.Warning;
-                    return;
-                }
-            }
-            if (DA.GetData(6, ref rotAngle))
-            {
-                rFMember.RotationType = RotationType.Angle;
-                rFMember.RotationAngle = rotAngle;
-            }
-            if (DA.GetData(7, ref eCS))
-            {
-                rFMember.EndCrossSectionNo = eCS;
-            }
-            if (DA.GetData(8, ref sH))
-            {
-                rFMember.StartHingeNo = sH;
-            }
-            if (DA.GetData(9, ref eH))
-            {
-                rFMember.EndHingeNo = eH;
-            }
-            if (DA.GetData(10, ref ecc))
-            {
-                rFMember.EccentricityNo = ecc;
-            }
-            if (DA.GetData(11, ref div))
-            {
-                rFMember.DivisionNo = div;
-            }
-            if (DA.GetData(12, ref taperType))
-            {
-                rFMember.TaperShape = (TaperShapeType)taperType;
-                if (rFMember.TaperShape == TaperShapeType.UnknownTaperShape)
-                {
-                    msg = "Taper Shape Type not supported. ";
-                    level = GH_RuntimeMessageLevel.Warning;
-                    return;
-                }
-            }
-            DA.SetData(0, rFMember);
+        //    if (DA.GetData(15, ref inRFEM))
+        //    {
+        //        rFMember = new RFMember((RFMember)inRFEM.Value);
+        //        if (DA.GetData(1, ref sCS))
+        //        {
+        //            rFMember.StartCrossSectionNo = sCS;
+        //        }
+        //        if (DA.GetData(0, ref inCurve))
+        //        {
+        //            var myRFLine = new RFLine();
+        //            Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+        //            rFMember.SetFrames();
+        //        }
+        //        if (DA.GetData(1, ref sCS))
+        //        {
+        //            rFMember.StartCrossSectionNo = sCS;
+        //        }
+        //    }
+        //    else if (DA.GetData(0, ref inCurve) && DA.GetData(1, ref sCS))
+        //    {
+        //        var myRFLine = new RFLine();
+        //        Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+        //        rFMember.BaseLine = myRFLine;
+        //        rFMember.SetFrames();                
+        //        rFMember.StartCrossSectionNo = sCS;
+        //    }
+        //    else
+        //    {
+        //        msg = "Insufficient input parameters. Provide either Input Curve and Start Cross Section or existing RFMember Object. ";
+        //        level = GH_RuntimeMessageLevel.Warning;
+        //    return;
+        //}
+        //    if (DA.GetData(16, ref mod))
+        //    {
+        //        rFMember.ToModify = mod;
+        //    }
+        //    if (DA.GetData(17, ref del))
+        //    {
+        //        rFMember.ToDelete = del;
+        //    }
+        //    if (DA.GetData(2, ref noIndex))
+        //    {
+        //        rFMember.No = noIndex;
+        //    }
+        //    if (DA.GetData(3, ref comment))
+        //    {
+        //        rFMember.Comment = comment;
+        //    }
+        //    if (DA.GetData(4, ref lineNo))
+        //    {
+        //        rFMember.LineNo = lineNo;
+        //    }
+        //    if (DA.GetData(5, ref memberType))
+        //    {
+        //        rFMember.Type = (MemberType)memberType;
+        //        if (rFMember.Type == MemberType.UnknownMemberType)
+        //        {
+        //            msg = "Member Type not supported. ";
+        //            level = GH_RuntimeMessageLevel.Warning;
+        //            return;
+        //        }
+        //    }
+        //    if (DA.GetData(6, ref rotAngle))
+        //    {
+        //        rFMember.RotationType = RotationType.Angle;
+        //        rFMember.RotationAngle = rotAngle;
+        //    }
+        //    if (DA.GetData(7, ref eCS))
+        //    {
+        //        rFMember.EndCrossSectionNo = eCS;
+        //    }
+        //    if (DA.GetData(8, ref sH))
+        //    {
+        //        rFMember.StartHingeNo = sH;
+        //    }
+        //    if (DA.GetData(9, ref eH))
+        //    {
+        //        rFMember.EndHingeNo = eH;
+        //    }
+        //    if (DA.GetData(10, ref ecc))
+        //    {
+        //        rFMember.EccentricityNo = ecc;
+        //    }
+        //    if (DA.GetData(11, ref div))
+        //    {
+        //        rFMember.DivisionNo = div;
+        //    }
+        //    if (DA.GetData(12, ref taperType))
+        //    {
+        //        rFMember.TaperShape = (TaperShapeType)taperType;
+        //        if (rFMember.TaperShape == TaperShapeType.UnknownTaperShape)
+        //        {
+        //            msg = "Taper Shape Type not supported. ";
+        //            level = GH_RuntimeMessageLevel.Warning;
+        //            return;
+        //        }
+        //    }
+        //    DA.SetData(0, rFMember);
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
+
 using System.Reflection;
 using Rhino.Geometry;
 

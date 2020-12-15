@@ -8,8 +8,8 @@ using System.Linq;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -59,26 +59,26 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfMat = (RFMaterial)inGH.Value;
-            // Output
-            DA.SetData(0, rfMat.Description);
-            DA.SetData(1, rfMat.No);
-            DA.SetData(2, rfMat.Comment);
-            DA.SetData(3, rfMat.E);
-            DA.SetData(4, rfMat.Mu);
-            DA.SetData(5, rfMat.G);
-            DA.SetData(6, rfMat.W);
-            DA.SetData(7, rfMat.Alpha);
-            DA.SetData(8, rfMat.Gamma);
-            DA.SetData(9, rfMat.ModelType);
-            DA.SetData(10, rfMat.TextID);
-            DA.SetData(11, rfMat.UserDefined);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfMat = (RFMaterial)inGH.Value;
+            //// Output
+            //DA.SetData(0, rfMat.Description);
+            //DA.SetData(1, rfMat.No);
+            //DA.SetData(2, rfMat.Comment);
+            //DA.SetData(3, rfMat.E);
+            //DA.SetData(4, rfMat.Mu);
+            //DA.SetData(5, rfMat.G);
+            //DA.SetData(6, rfMat.W);
+            //DA.SetData(7, rfMat.Alpha);
+            //DA.SetData(8, rfMat.Gamma);
+            //DA.SetData(9, rfMat.ModelType);
+            //DA.SetData(10, rfMat.TextID);
+            //DA.SetData(11, rfMat.UserDefined);
         }
     }
 }

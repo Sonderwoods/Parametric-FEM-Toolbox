@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.Utilities;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 using Parametric_FEM_Toolbox.GUI;
 
@@ -98,56 +98,56 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            var point = new Point3d();
-            var noIndex = 0;
-            var comment = "";
-            var rFNode = new RFNode();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            //int newNo = 0;
-            var dataprovided = false;
+            //var point = new Point3d();
+            //var noIndex = 0;
+            //var comment = "";
+            //var rFNode = new RFNode();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            ////int newNo = 0;
+            //var dataprovided = false;
 
-            if (DA.GetData(3, ref inRFEM))
-            {
-                rFNode = new RFNode((RFNode)inRFEM.Value);
-                dataprovided = true;
-            }
-            if (DA.GetData(0, ref point))
-            {
-                rFNode.RefObjectNo = 0;
-                rFNode.X = point.X;
-                rFNode.Y = point.Y;
-                rFNode.Z = point.Z;
-                rFNode.Location = point;
-                dataprovided = true;
-            }
-            if (!dataprovided)
-            {
-                return;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rFNode.No = noIndex;
-            }
-            if (DA.GetData(4, ref mod))
-            {
-                rFNode.ToModify = mod;
-                //if (!(rFNode.No>0))
-                //{
-                //    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Index nummer required in order to modify or delete RFEM objects.");
-                //}
-            }
-            if (DA.GetData(5, ref del))
-            {
-                rFNode.ToDelete = del;
-            }
-            if (DA.GetData(2, ref comment))
-            {
-                rFNode.Comment = comment;
-            }
+            //if (DA.GetData(3, ref inRFEM))
+            //{
+            //    rFNode = new RFNode((RFNode)inRFEM.Value);
+            //    dataprovided = true;
+            //}
+            //if (DA.GetData(0, ref point))
+            //{
+            //    rFNode.RefObjectNo = 0;
+            //    rFNode.X = point.X;
+            //    rFNode.Y = point.Y;
+            //    rFNode.Z = point.Z;
+            //    rFNode.Location = point;
+            //    dataprovided = true;
+            //}
+            //if (!dataprovided)
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rFNode.No = noIndex;
+            //}
+            //if (DA.GetData(4, ref mod))
+            //{
+            //    rFNode.ToModify = mod;
+            //    //if (!(rFNode.No>0))
+            //    //{
+            //    //    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Index nummer required in order to modify or delete RFEM objects.");
+            //    //}
+            //}
+            //if (DA.GetData(5, ref del))
+            //{
+            //    rFNode.ToDelete = del;
+            //}
+            //if (DA.GetData(2, ref comment))
+            //{
+            //    rFNode.Comment = comment;
+            //}
 
-            DA.SetData(0, rFNode);
+            //DA.SetData(0, rFNode);
         }
 
         // Additonal functions

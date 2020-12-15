@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -83,75 +83,75 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            //Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfSup = new RFSupportS();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var vxz = 0.0;
-            var vyz = 0.0;
-            var srfcList = "";
+            ////Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            ////var rfSup = new RFSupportS();
+            ////var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var vxz = 0.0;
+            //var vyz = 0.0;
+            //var srfcList = "";
 
 
-            if (DA.GetData(8, ref inRFEM))
-            {
-                rfSup = new RFSupportS((RFSupportS)inRFEM.Value);
-            }
-            else if (DA.GetData(0, ref srfcList))
-            {
-                rfSup = new RFSupportS();
-                rfSup.SurfaceList = srfcList;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Surface List or existing RFSupportS Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(9, ref mod))
-            {
-                rfSup.ToModify = mod;
-            }
-            if (DA.GetData(10, ref del))
-            {
-                rfSup.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfSup.No = noIndex;
-            }
-            if (DA.GetData(5, ref comment))
-            {
-                rfSup.Comment = comment;
-            }
-            if (DA.GetData(2, ref tx))
-            {
-                rfSup.Tx = tx;
-            }
-            if (DA.GetData(3, ref ty))
-            {
-                rfSup.Ty = ty;
-            }
-            if (DA.GetData(4, ref tz))
-            {
-                rfSup.Tz = tz;
-            }
-            if (DA.GetData(6, ref vxz))
-            {
-                rfSup.Vxz = vxz;
-            }
-            if (DA.GetData(7, ref vyz))
-            {
-                rfSup.Vyz = vyz;
-            }
+            //if (DA.GetData(8, ref inRFEM))
+            //{
+            //    rfSup = new RFSupportS((RFSupportS)inRFEM.Value);
+            //}
+            //else if (DA.GetData(0, ref srfcList))
+            //{
+            //    rfSup = new RFSupportS();
+            //    rfSup.SurfaceList = srfcList;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Surface List or existing RFSupportS Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(9, ref mod))
+            //{
+            //    rfSup.ToModify = mod;
+            //}
+            //if (DA.GetData(10, ref del))
+            //{
+            //    rfSup.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfSup.No = noIndex;
+            //}
+            //if (DA.GetData(5, ref comment))
+            //{
+            //    rfSup.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref tx))
+            //{
+            //    rfSup.Tx = tx;
+            //}
+            //if (DA.GetData(3, ref ty))
+            //{
+            //    rfSup.Ty = ty;
+            //}
+            //if (DA.GetData(4, ref tz))
+            //{
+            //    rfSup.Tz = tz;
+            //}
+            //if (DA.GetData(6, ref vxz))
+            //{
+            //    rfSup.Vxz = vxz;
+            //}
+            //if (DA.GetData(7, ref vyz))
+            //{
+            //    rfSup.Vyz = vyz;
+            //}
 
 
-            DA.SetData(0, rfSup);
+            //DA.SetData(0, rfSup);
         }
     }
 }

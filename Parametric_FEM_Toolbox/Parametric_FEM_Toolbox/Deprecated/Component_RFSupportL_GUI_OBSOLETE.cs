@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -87,8 +87,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
             mngr.RegisterUnit(evaluationUnit);
 
             evaluationUnit.RegisterInputParam(new Param_String(), "Line List", "LineList", "Line List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "Line List", "LineList", "Line List", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Reference System Type", "RefSys", UtilLibrary.DescriptionRFTypes(typeof(ReferenceSystemType)), GH_ParamAccess.item);
+            //evaluationUnit.RegisterInputParam(new Param_String(), "Reference System Type", "RefSys", UtilLibrary.DescriptionRFTypes(typeof(ReferenceSystemType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
 
             evaluationUnit.RegisterInputParam(new Param_RFEM(), "Line Support", "LineSup", "Support object from the RFEM model to modify", GH_ParamAccess.item);
@@ -124,90 +125,90 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfSup = new RFSupportL();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var rx = 0.0;
-            var ry = 0.0;
-            var rz = 0.0;
-            var lineList = "";
-            var refSys = "";
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            ////var rfSup = new RFSupportL();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var rx = 0.0;
+            //var ry = 0.0;
+            //var rz = 0.0;
+            //var lineList = "";
+            //var refSys = "";
+            ////int newNo = 0;
 
 
-            if (DA.GetData(11, ref inRFEM))
-            {
-                rfSup = new RFSupportL((RFSupportL)inRFEM.Value);
-            }else if (DA.GetData(0, ref inCurve))
-            {
-                var myRFLine = new RFLine();                
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                var myRFLines = new List<RFLine>() { myRFLine };
-                rfSup = new RFSupportL(new LineSupport(), myRFLines);
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(12, ref mod))
-            {
-                rfSup.ToModify = mod;
-            }
-            if (DA.GetData(13, ref del))
-            {
-                rfSup.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfSup.No = noIndex;
-            }
-            if (DA.GetData(8, ref comment))
-            {
-                rfSup.Comment = comment;
-            }
-            if (DA.GetData(2, ref tx))
-            {
-                rfSup.Tx = tx;
-            }
-            if (DA.GetData(3, ref ty))
-            {
-                rfSup.Ty = ty;
-            }
-            if (DA.GetData(4, ref tz))
-            {
-                rfSup.Tz = tz;
-            }
-            if (DA.GetData(5, ref rx))
-            {
-                rfSup.Rx = rx;
-            }
-            if (DA.GetData(6, ref ry))
-            {
-                rfSup.Ry = ry;
-            }
-            if (DA.GetData(7, ref rz))
-            {
-                rfSup.Rz = rz;
-            }
-            if (DA.GetData(9, ref lineList))
-            {
-                rfSup.LineList = lineList;
-            }
-            if (DA.GetData(10, ref refSys))
-            {
-                Enum.TryParse(refSys, out ReferenceSystemType myrefSys);
-                rfSup.RSType = myrefSys;
-            }
+            //if (DA.GetData(11, ref inRFEM))
+            //{
+            //    rfSup = new RFSupportL((RFSupportL)inRFEM.Value);
+            //}else if (DA.GetData(0, ref inCurve))
+            //{
+            //    var myRFLine = new RFLine();                
+            //    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //    var myRFLines = new List<RFLine>() { myRFLine };
+            //    rfSup = new RFSupportL(new LineSupport(), myRFLines);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(12, ref mod))
+            //{
+            //    rfSup.ToModify = mod;
+            //}
+            //if (DA.GetData(13, ref del))
+            //{
+            //    rfSup.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfSup.No = noIndex;
+            //}
+            //if (DA.GetData(8, ref comment))
+            //{
+            //    rfSup.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref tx))
+            //{
+            //    rfSup.Tx = tx;
+            //}
+            //if (DA.GetData(3, ref ty))
+            //{
+            //    rfSup.Ty = ty;
+            //}
+            //if (DA.GetData(4, ref tz))
+            //{
+            //    rfSup.Tz = tz;
+            //}
+            //if (DA.GetData(5, ref rx))
+            //{
+            //    rfSup.Rx = rx;
+            //}
+            //if (DA.GetData(6, ref ry))
+            //{
+            //    rfSup.Ry = ry;
+            //}
+            //if (DA.GetData(7, ref rz))
+            //{
+            //    rfSup.Rz = rz;
+            //}
+            //if (DA.GetData(9, ref lineList))
+            //{
+            //    rfSup.LineList = lineList;
+            //}
+            //if (DA.GetData(10, ref refSys))
+            //{
+            //    Enum.TryParse(refSys, out ReferenceSystemType myrefSys);
+            //    rfSup.RSType = myrefSys;
+            //}
             
-            DA.SetData(0, rfSup);
+            //DA.SetData(0, rfSup);
         }
                  
         /// <summary>

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -40,8 +40,8 @@ namespace Parametric_FEM_Toolbox.GUI
             unit.Inputs[0].Parameter.Optional = true;
             unit.RegisterInputParam(new Param_String(), "Description", "Description", "Description of Load Case.", GH_ParamAccess.item);
             unit.Inputs[1].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Action Category", "Action", UtilLibrary.DescriptionRFTypes(typeof(ActionCategoryType)), GH_ParamAccess.item);
-            unit.Inputs[2].EnumInput = UtilLibrary.ListRFTypes(typeof(ActionCategoryType));
+            unit.RegisterInputParam(new Param_String(), "Description", "Description", "Description of Load Case.", GH_ParamAccess.item);
+           
             unit.Inputs[2].Parameter.Optional = true;
             unit.RegisterInputParam(new Param_String(), "Comment", "Comment", "Comment.", GH_ParamAccess.item);
             unit.Inputs[3].Parameter.Optional = true;
@@ -79,76 +79,76 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            var noIndex = 0;
-            var comment = "";
-            var description = "";
-            var rfLoadCase = new RFLoadCase();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var toSolve = true;
-            var selfweight = new Vector3d(0, 0, 0);
-            var action = 0;
+            //var noIndex = 0;
+            //var comment = "";
+            //var description = "";
+            //var rfLoadCase = new RFLoadCase();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var toSolve = true;
+            //var selfweight = new Vector3d(0, 0, 0);
+            //var action = 0;
 
 
-            if (DA.GetData(6, ref inRFEM))
-            {
-                rfLoadCase = new RFLoadCase((RFLoadCase)inRFEM.Value);
-                if (DA.GetData(2, ref action))
-                {
-                    rfLoadCase.ActionCategory = (ActionCategoryType)action;
-                }
-                if (DA.GetData(0, ref noIndex))
-                {
-                    rfLoadCase.No = noIndex;
-                }
-            }
-            else if  (DA.GetData(0, ref noIndex) && (DA.GetData(2, ref action)))
-            {
-                rfLoadCase.No = noIndex;
-                rfLoadCase.ActionCategory = (ActionCategoryType)action;
-                // Set ToSolve = true
-                rfLoadCase.ToSolve = true;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Load Case Number and Action Category or existing RFLoadCase Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(7, ref mod))
-            {
-                rfLoadCase.ToModify = mod;
-            }
-            if (DA.GetData(8, ref del))
-            {
-                rfLoadCase.ToDelete = del;
-            }
-            if (DA.GetData(1, ref description))
-            {
-                rfLoadCase.Description = description;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rfLoadCase.Comment = comment;
-            }
-            if (DA.GetData(4, ref selfweight))
-            {
-                rfLoadCase.SelfWeightFactor = selfweight;
-            }
-            if (DA.GetData(5, ref toSolve))
-            {
-                rfLoadCase.ToSolve = toSolve;
-            }
+            //if (DA.GetData(6, ref inRFEM))
+            //{
+            //    rfLoadCase = new RFLoadCase((RFLoadCase)inRFEM.Value);
+            //    if (DA.GetData(2, ref action))
+            //    {
+            //        rfLoadCase.ActionCategory = (ActionCategoryType)action;
+            //    }
+            //    if (DA.GetData(0, ref noIndex))
+            //    {
+            //        rfLoadCase.No = noIndex;
+            //    }
+            //}
+            //else if  (DA.GetData(0, ref noIndex) && (DA.GetData(2, ref action)))
+            //{
+            //    rfLoadCase.No = noIndex;
+            //    rfLoadCase.ActionCategory = (ActionCategoryType)action;
+            //    // Set ToSolve = true
+            //    rfLoadCase.ToSolve = true;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Load Case Number and Action Category or existing RFLoadCase Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(7, ref mod))
+            //{
+            //    rfLoadCase.ToModify = mod;
+            //}
+            //if (DA.GetData(8, ref del))
+            //{
+            //    rfLoadCase.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref description))
+            //{
+            //    rfLoadCase.Description = description;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rfLoadCase.Comment = comment;
+            //}
+            //if (DA.GetData(4, ref selfweight))
+            //{
+            //    rfLoadCase.SelfWeightFactor = selfweight;
+            //}
+            //if (DA.GetData(5, ref toSolve))
+            //{
+            //    rfLoadCase.ToSolve = toSolve;
+            //}
 
-            // Check Action Category
-            if (rfLoadCase.ActionCategory == ActionCategoryType.UnknownActionCategory)
-            {
-                msg = "Action Category Type not supported. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }            
-            DA.SetData(0, rfLoadCase);
+            //// Check Action Category
+            //if (rfLoadCase.ActionCategory == ActionCategoryType.UnknownActionCategory)
+            //{
+            //    msg = "Action Category Type not supported. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}            
+            //DA.SetData(0, rfLoadCase);
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -63,31 +63,31 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfSurfaceLoad = (RFSurfaceLoad)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            ////var rfSurfaceLoad = (RFSurfaceLoad)inGH.Value;
 
-            // Output
-            DA.SetData(0, rfSurfaceLoad.SurfaceList);
-            DA.SetData(1, rfSurfaceLoad.No);
-            DA.SetData(2, rfSurfaceLoad.LoadCase);
-            DA.SetData(3, rfSurfaceLoad.Comment);
-            DA.SetData(4, rfSurfaceLoad.Magnitude1);
-            DA.SetData(5, rfSurfaceLoad.Magnitude2);
-            DA.SetData(6, rfSurfaceLoad.Magnitude3);
-            DA.SetData(7, rfSurfaceLoad.Magnitude4);
-            DA.SetData(8, rfSurfaceLoad.Magnitude5);
-            DA.SetData(9, rfSurfaceLoad.Magnitude6);
-            DA.SetData(10, rfSurfaceLoad.Node1No);
-            DA.SetData(11, rfSurfaceLoad.Node2No);
-            DA.SetData(12, rfSurfaceLoad.Node3No);
-            DA.SetData(13, rfSurfaceLoad.LoadType);
-            DA.SetData(14, rfSurfaceLoad.LoadDirType);
-            DA.SetData(15, rfSurfaceLoad.LoadDistType);
+            //// Output
+            //DA.SetData(0, rfSurfaceLoad.SurfaceList);
+            //DA.SetData(1, rfSurfaceLoad.No);
+            //DA.SetData(2, rfSurfaceLoad.LoadCase);
+            //DA.SetData(3, rfSurfaceLoad.Comment);
+            //DA.SetData(4, rfSurfaceLoad.Magnitude1);
+            //DA.SetData(5, rfSurfaceLoad.Magnitude2);
+            //DA.SetData(6, rfSurfaceLoad.Magnitude3);
+            //DA.SetData(7, rfSurfaceLoad.Magnitude4);
+            //DA.SetData(8, rfSurfaceLoad.Magnitude5);
+            //DA.SetData(9, rfSurfaceLoad.Magnitude6);
+            //DA.SetData(10, rfSurfaceLoad.Node1No);
+            //DA.SetData(11, rfSurfaceLoad.Node2No);
+            //DA.SetData(12, rfSurfaceLoad.Node3No);
+            //DA.SetData(13, rfSurfaceLoad.LoadType);
+            //DA.SetData(14, rfSurfaceLoad.LoadDirType);
+            //DA.SetData(15, rfSurfaceLoad.LoadDistType);
         }
     }
 }

@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -89,8 +89,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
             mngr.RegisterUnit(evaluationUnit);
 
             evaluationUnit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Index related to the Line Hinge", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Index related to the Line Hinge", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Side", "Side", UtilLibrary.DescriptionRFTypes(typeof(HingeSideType)), GH_ParamAccess.item);
+            //evaluationUnit.RegisterInputParam(new Param_String(), "Side", "Side", UtilLibrary.DescriptionRFTypes(typeof(HingeSideType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
 
             evaluationUnit.RegisterInputParam(new Param_RFEM(), "Line Hinge", "LineHinge", "Line Hinge object from the RFEM model to modify", GH_ParamAccess.item);
@@ -126,95 +127,95 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfHinge = new RFLineHinge();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var rx = 0.0;
-            var ry = 0.0;
-            var rz = 0.0;
-            var lineNo = 0;
-            var sfcNo = 0;
-            var side = "";
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfHinge = new RFLineHinge();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var rx = 0.0;
+            //var ry = 0.0;
+            //var rz = 0.0;
+            //var lineNo = 0;
+            //var sfcNo = 0;
+            //var side = "";
+            ////int newNo = 0;
 
 
-            if (DA.GetData(12, ref inRFEM))
-            {
-                rfHinge = new RFLineHinge((RFLineHinge)inRFEM.Value);
-            }else if (DA.GetData(0, ref inCurve))
-            {
-                var myRFLine = new RFLine();                
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                rfHinge = new RFLineHinge(new RFLineHinge(), myRFLine);
+            //if (DA.GetData(12, ref inRFEM))
+            //{
+            //    rfHinge = new RFLineHinge((RFLineHinge)inRFEM.Value);
+            //}else if (DA.GetData(0, ref inCurve))
+            //{
+            //    var myRFLine = new RFLine();                
+            //    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //    rfHinge = new RFLineHinge(new RFLineHinge(), myRFLine);
 
-            }else if (DA.GetData(10, ref lineNo))
-            {
-                rfHinge.LineNo = lineNo;
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(13, ref mod))
-            {
-                rfHinge.ToModify = mod;
-            }
-            if (DA.GetData(14, ref del))
-            {
-                rfHinge.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfHinge.No = noIndex;
-            }
-            if (DA.GetData(2, ref sfcNo))
-            {
-                rfHinge.SfcNo = sfcNo;
-            }
-            if (DA.GetData(9, ref comment))
-            {
-                rfHinge.Comment = comment;
-            }
-            if (DA.GetData(3, ref tx))
-            {
-                rfHinge.Tx = tx;
-            }
-            if (DA.GetData(4, ref ty))
-            {
-                rfHinge.Ty = ty;
-            }
-            if (DA.GetData(5, ref tz))
-            {
-                rfHinge.Tz = tz;
-            }
-            if (DA.GetData(6, ref rx))
-            {
-                rfHinge.Rx = rx;
-            }
-            if (DA.GetData(7, ref ry))
-            {
-                rfHinge.Ry = ry;
-            }
-            if (DA.GetData(8, ref rz))
-            {
-                rfHinge.Rz = rz;
-            }
+            //}else if (DA.GetData(10, ref lineNo))
+            //{
+            //    rfHinge.LineNo = lineNo;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(13, ref mod))
+            //{
+            //    rfHinge.ToModify = mod;
+            //}
+            //if (DA.GetData(14, ref del))
+            //{
+            //    rfHinge.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfHinge.No = noIndex;
+            //}
+            //if (DA.GetData(2, ref sfcNo))
+            //{
+            //    rfHinge.SfcNo = sfcNo;
+            //}
+            //if (DA.GetData(9, ref comment))
+            //{
+            //    rfHinge.Comment = comment;
+            //}
+            //if (DA.GetData(3, ref tx))
+            //{
+            //    rfHinge.Tx = tx;
+            //}
+            //if (DA.GetData(4, ref ty))
+            //{
+            //    rfHinge.Ty = ty;
+            //}
+            //if (DA.GetData(5, ref tz))
+            //{
+            //    rfHinge.Tz = tz;
+            //}
+            //if (DA.GetData(6, ref rx))
+            //{
+            //    rfHinge.Rx = rx;
+            //}
+            //if (DA.GetData(7, ref ry))
+            //{
+            //    rfHinge.Ry = ry;
+            //}
+            //if (DA.GetData(8, ref rz))
+            //{
+            //    rfHinge.Rz = rz;
+            //}
 
-            if (DA.GetData(11, ref side))
-            {
-                Enum.TryParse(side, out HingeSideType mySide);
-                rfHinge.Side = mySide;
-            }
+            //if (DA.GetData(11, ref side))
+            //{
+            //    Enum.TryParse(side, out HingeSideType mySide);
+            //    rfHinge.Side = mySide;
+            //}
             
-            DA.SetData(0, rfHinge);
+            //DA.SetData(0, rfHinge);
         }
                  
         /// <summary>

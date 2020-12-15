@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -87,8 +87,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
             mngr.RegisterUnit(evaluationUnit);
 
             evaluationUnit.RegisterInputParam(new Param_String(), "Node List", "NodeList", "Node List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "Node List", "NodeList", "Node List", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Rotation Sequence", "Seq", UtilLibrary.DescriptionRFTypes(typeof(RotationSequence)), GH_ParamAccess.item);
+            //evaluationUnit.RegisterInputParam(new Param_String(), "Rotation Sequence", "Seq", UtilLibrary.DescriptionRFTypes(typeof(RotationSequence)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
             evaluationUnit.RegisterInputParam(new Param_Point(), "Rotation Angles", "Rot", "Euler Angles [rad]", GH_ParamAccess.item);
             evaluationUnit.Inputs[2].Parameter.Optional = true;
@@ -126,102 +127,102 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Plane inPlane = Plane.WorldXY;
-            var noIndex = 0;
-            var comment = "";
-            var rfSup = new RFSupportP();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var rx = 0.0;
-            var ry = 0.0;
-            var rz = 0.0;
-            var nodeList = "";
-            var rotseq = "";
-            var eulerAng = new Point3d();
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Plane inPlane = Plane.WorldXY;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfSup = new RFSupportP();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var rx = 0.0;
+            //var ry = 0.0;
+            //var rz = 0.0;
+            //var nodeList = "";
+            //var rotseq = "";
+            //var eulerAng = new Point3d();
+            ////int newNo = 0;
 
 
-            if (DA.GetData(12, ref inRFEM))
-            {
-                rfSup = new RFSupportP((RFSupportP)inRFEM.Value);
-            }else if (DA.GetData(0, ref inPlane))
-            {
-                var inPlanes = new List<Plane>();
-                inPlanes.Add(inPlane);
-                rfSup = new RFSupportP(new NodalSupport(), inPlanes);
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(13, ref mod))
-            {
-                rfSup.ToModify = mod;
-            }
-            if (DA.GetData(14, ref del))
-            {
-                rfSup.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfSup.No = noIndex;
-            }
-            if (DA.GetData(8, ref comment))
-            {
-                rfSup.Comment = comment;
-            }
-            if (DA.GetData(2, ref tx))
-            {
-                rfSup.Tx = tx;
-            }
-            if (DA.GetData(3, ref ty))
-            {
-                rfSup.Ty = ty;
-            }
-            if (DA.GetData(4, ref tz))
-            {
-                rfSup.Tz = tz;
-            }
-            if (DA.GetData(5, ref rx))
-            {
-                rfSup.Rx = rx;
-            }
-            if (DA.GetData(6, ref ry))
-            {
-                rfSup.Ry = ry;
-            }
-            if (DA.GetData(7, ref rz))
-            {
-                rfSup.Rz = rz;
-            }
-            if (DA.GetData(9, ref nodeList))
-            {
-                rfSup.NodeList = nodeList;
-            }
-            if (DA.GetData(10, ref rotseq) || (DA.GetData(11, ref rotseq)))
-            {
-                rfSup.RSType = ReferenceSystemType.UserDefinedSystemType;
-                rfSup.UDSType = UserDefinedAxisSystemType.RotatedSystemType;
-                if (DA.GetData(10, ref rotseq))
-                {
-                    Enum.TryParse(rotseq, out RotationSequence myRotSeq);
-                    rfSup.RSeq = myRotSeq;
-                }
-                if (DA.GetData(11, ref eulerAng))
-                {
-                    rfSup.RotX = eulerAng.X;
-                    rfSup.RotY = eulerAng.Y;
-                    rfSup.RotZ = eulerAng.Z;
-                }
-                rfSup.GetOrientation();
-            }
+            //if (DA.GetData(12, ref inRFEM))
+            //{
+            //    rfSup = new RFSupportP((RFSupportP)inRFEM.Value);
+            //}else if (DA.GetData(0, ref inPlane))
+            //{
+            //    var inPlanes = new List<Plane>();
+            //    inPlanes.Add(inPlane);
+            //    rfSup = new RFSupportP(new NodalSupport(), inPlanes);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(13, ref mod))
+            //{
+            //    rfSup.ToModify = mod;
+            //}
+            //if (DA.GetData(14, ref del))
+            //{
+            //    rfSup.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfSup.No = noIndex;
+            //}
+            //if (DA.GetData(8, ref comment))
+            //{
+            //    rfSup.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref tx))
+            //{
+            //    rfSup.Tx = tx;
+            //}
+            //if (DA.GetData(3, ref ty))
+            //{
+            //    rfSup.Ty = ty;
+            //}
+            //if (DA.GetData(4, ref tz))
+            //{
+            //    rfSup.Tz = tz;
+            //}
+            //if (DA.GetData(5, ref rx))
+            //{
+            //    rfSup.Rx = rx;
+            //}
+            //if (DA.GetData(6, ref ry))
+            //{
+            //    rfSup.Ry = ry;
+            //}
+            //if (DA.GetData(7, ref rz))
+            //{
+            //    rfSup.Rz = rz;
+            //}
+            //if (DA.GetData(9, ref nodeList))
+            //{
+            //    rfSup.NodeList = nodeList;
+            //}
+            //if (DA.GetData(10, ref rotseq) || (DA.GetData(11, ref rotseq)))
+            //{
+            //    rfSup.RSType = ReferenceSystemType.UserDefinedSystemType;
+            //    rfSup.UDSType = UserDefinedAxisSystemType.RotatedSystemType;
+            //    if (DA.GetData(10, ref rotseq))
+            //    {
+            //        Enum.TryParse(rotseq, out RotationSequence myRotSeq);
+            //        rfSup.RSeq = myRotSeq;
+            //    }
+            //    if (DA.GetData(11, ref eulerAng))
+            //    {
+            //        rfSup.RotX = eulerAng.X;
+            //        rfSup.RotY = eulerAng.Y;
+            //        rfSup.RotZ = eulerAng.Z;
+            //    }
+            //    rfSup.GetOrientation();
+            //}
             
-            DA.SetData(0, rfSup);
+            //DA.SetData(0, rfSup);
         }
                  
         /// <summary>

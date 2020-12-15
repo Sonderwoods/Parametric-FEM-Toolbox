@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -52,21 +52,21 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfLoadCase = (RFLoadCase)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfLoadCase = (RFLoadCase)inGH.Value;
 
-            // Output            
-            DA.SetData(0, rfLoadCase.No);
-            DA.SetData(1, rfLoadCase.Description);
-            DA.SetData(2, rfLoadCase.ActionCategory);
-            DA.SetData(3, rfLoadCase.Comment);
-            DA.SetData(4, rfLoadCase.SelfWeightFactor);
-            DA.SetData(5, rfLoadCase.ToSolve);
+            //// Output            
+            //DA.SetData(0, rfLoadCase.No);
+            //DA.SetData(1, rfLoadCase.Description);
+            //DA.SetData(2, rfLoadCase.ActionCategory);
+            //DA.SetData(3, rfLoadCase.Comment);
+            //DA.SetData(4, rfLoadCase.SelfWeightFactor);
+            //DA.SetData(5, rfLoadCase.ToSolve);
         }
     }
 }

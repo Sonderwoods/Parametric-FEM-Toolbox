@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -53,19 +53,19 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rFNode = (RFNode)inGH.Value;
-            // Output
-            DA.SetData(0, rFNode.Location);
-            DA.SetData(1, rFNode.No);
-            DA.SetData(2, rFNode.Comment);
-            DA.SetData(3, rFNode.CS);
-            DA.SetData(4, rFNode.RefObjectNo);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rFNode = (RFNode)inGH.Value;
+            //// Output
+            //DA.SetData(0, rFNode.Location);
+            //DA.SetData(1, rFNode.No);
+            //DA.SetData(2, rFNode.Comment);
+            //DA.SetData(3, rFNode.CS);
+            //DA.SetData(4, rFNode.RefObjectNo);
 
         }
     }

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -78,63 +78,63 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
-            //var line = new LineCurve();
-            Brep inSrfc = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfOpening = new RFOpening();
-            var inRFEM = new GH_RFEM();
-            var rfEdges = new List<RFLine>();
-            var mod = false;
-            var del = false;
-            var boundList = "";
-            var inSrfcNo = 0;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Brep inSrfc = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfOpening = new RFOpening();
+            //var inRFEM = new GH_RFEM();
+            //var rfEdges = new List<RFLine>();
+            //var mod = false;
+            //var del = false;
+            //var boundList = "";
+            //var inSrfcNo = 0;
+            ////int newNo = 0;
 
-            if (DA.GetData(5, ref inRFEM))
-            {
-                rfOpening = new RFOpening((RFOpening)inRFEM.Value);
-                if (DA.GetData(0, ref inSrfc))
-                {
-                    Component_RFOpening.SetGeometry(inSrfc, ref rfOpening);
-                }
-            }
-            else if (DA.GetData(0, ref inSrfc))
-            {
-                  Component_RFOpening.SetGeometry(inSrfc, ref rfOpening);
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Input Opening Shape or existing RFOpening Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(6, ref mod))
-            {
-                rfOpening.ToModify = mod;
-            }
-            if (DA.GetData(7, ref del))
-            {
-                rfOpening.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfOpening.No = noIndex;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rfOpening.Comment = comment;
-            }
-            if (DA.GetData(2, ref inSrfcNo))
-            {
-                rfOpening.InSurfaceNo = inSrfcNo;
-            }
-            if (DA.GetData(4, ref boundList))
-            {
-                rfOpening.BoundaryLineList = boundList;
-            }
+            //if (DA.GetData(5, ref inRFEM))
+            //{
+            //    rfOpening = new RFOpening((RFOpening)inRFEM.Value);
+            //    if (DA.GetData(0, ref inSrfc))
+            //    {
+            //        Component_RFOpening.SetGeometry(inSrfc, ref rfOpening);
+            //    }
+            //}
+            //else if (DA.GetData(0, ref inSrfc))
+            //{
+            //      Component_RFOpening.SetGeometry(inSrfc, ref rfOpening);
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Input Opening Shape or existing RFOpening Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(6, ref mod))
+            //{
+            //    rfOpening.ToModify = mod;
+            //}
+            //if (DA.GetData(7, ref del))
+            //{
+            //    rfOpening.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfOpening.No = noIndex;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rfOpening.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref inSrfcNo))
+            //{
+            //    rfOpening.InSurfaceNo = inSrfcNo;
+            //}
+            //if (DA.GetData(4, ref boundList))
+            //{
+            //    rfOpening.BoundaryLineList = boundList;
+            //}
 
-            DA.SetData(0, rfOpening);
+            //DA.SetData(0, rfOpening);
         }
     }
 }

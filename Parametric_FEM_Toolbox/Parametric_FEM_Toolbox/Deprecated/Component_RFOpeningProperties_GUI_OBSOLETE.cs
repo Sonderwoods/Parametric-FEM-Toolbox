@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grasshopper.Kernel;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -63,22 +63,22 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfOpening = (RFOpening)inGH.Value;
-            // Output
-            if (rfOpening.IsPlanar())
-            {
-                DA.SetData(0, rfOpening.ToPlanarBrep());
-            }            
-            DA.SetData(1, rfOpening.No);
-            DA.SetData(2, rfOpening.InSurfaceNo);
-            DA.SetData(3, rfOpening.Comment);
-            DA.SetData(4, rfOpening.BoundaryLineList);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfOpening = (RFOpening)inGH.Value;
+            //// Output
+            //if (rfOpening.IsPlanar())
+            //{
+            //    DA.SetData(0, rfOpening.ToPlanarBrep());
+            //}            
+            //DA.SetData(1, rfOpening.No);
+            //DA.SetData(2, rfOpening.InSurfaceNo);
+            //DA.SetData(3, rfOpening.Comment);
+            //DA.SetData(4, rfOpening.BoundaryLineList);
 
         }
 

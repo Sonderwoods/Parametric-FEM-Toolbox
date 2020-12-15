@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -61,28 +61,28 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfSupport = (RFSupportP)inGH.Value;
-            // Output
-            DA.SetDataList(0, rfSupport.Orientation);
-            DA.SetData(1, rfSupport.No);
-            DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
-            DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
-            DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
-            DA.SetData(5, ((rfSupport.Rx < 0) ? rfSupport.Rx * 1000 : rfSupport.Rx));
-            DA.SetData(6, ((rfSupport.Ry < 0) ? rfSupport.Ry * 1000 : rfSupport.Ry));
-            DA.SetData(7, ((rfSupport.Rz < 0) ? rfSupport.Rz * 1000 : rfSupport.Rz));
-            DA.SetData(8, rfSupport.Comment);
-            DA.SetData(9, rfSupport.NodeList);
-            DA.SetData(10, rfSupport.RSType);
-            DA.SetData(11, rfSupport.RSeq);
-            DA.SetData(12, new Vector3d(rfSupport.RotX.ToDegrees(),
-                rfSupport.RotY.ToDegrees(), rfSupport.RotZ.ToDegrees()));
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfSupport = (RFSupportP)inGH.Value;
+            //// Output
+            //DA.SetDataList(0, rfSupport.Orientation);
+            //DA.SetData(1, rfSupport.No);
+            //DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
+            //DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
+            //DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
+            //DA.SetData(5, ((rfSupport.Rx < 0) ? rfSupport.Rx * 1000 : rfSupport.Rx));
+            //DA.SetData(6, ((rfSupport.Ry < 0) ? rfSupport.Ry * 1000 : rfSupport.Ry));
+            //DA.SetData(7, ((rfSupport.Rz < 0) ? rfSupport.Rz * 1000 : rfSupport.Rz));
+            //DA.SetData(8, rfSupport.Comment);
+            //DA.SetData(9, rfSupport.NodeList);
+            //DA.SetData(10, rfSupport.RSType);
+            //DA.SetData(11, rfSupport.RSeq);
+            //DA.SetData(12, new Vector3d(rfSupport.RotX.ToDegrees(),
+            //    rfSupport.RotY.ToDegrees(), rfSupport.RotZ.ToDegrees()));
 
         }
     }

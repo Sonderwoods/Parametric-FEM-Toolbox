@@ -9,10 +9,10 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.Utilities;
-using Dlubal.RFEM5;
-using Dlubal.STEEL_EC3;
+
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.GUI
@@ -95,80 +95,80 @@ namespace Parametric_FEM_Toolbox.GUI
 
 
             var modelName = "";
-            IModel model = null;
-            IModelData data = null;
+            //IModel model = null;
+            //IModelData data = null;
 
             var errorMsg = new List<string>();
 
             DA.GetData(1, ref run);
-            if (run)
-            {
-                if (!DA.GetData(2+1, ref modelName))
-                {
-                    Component_GetData.ConnectRFEM(ref model, ref data);
-                }else
-                {
-                    Component_GetData.ConnectRFEM(modelName, ref model, ref data);
-                }
-                try
-                {
-                    //Calculate Load Combos
-                    DA.GetDataList(0, combos);
-                    var myCalculation = model.GetCalculation();
-                    myCalculation.Clean();
-                    foreach (var no in combos)
-                    {
-                        ErrorInfo[] errormsg = myCalculation.Calculate(LoadingType.LoadCombinationType, 1);
-                    }
+            //if (run)
+            //{
+            //    if (!DA.GetData(2+1, ref modelName))
+            //    {
+            //        Component_GetData.ConnectRFEM(ref model, ref data);
+            //    }else
+            //    {
+            //        Component_GetData.ConnectRFEM(modelName, ref model, ref data);
+            //    }
+            //    try
+            //    {
+            //        //Calculate Load Combos
+            //        DA.GetDataList(0, combos);
+            //        var myCalculation = model.GetCalculation();
+            //        myCalculation.Clean();
+            //        foreach (var no in combos)
+            //        {
+            //            ErrorInfo[] errormsg = myCalculation.Calculate(LoadingType.LoadCombinationType, 1);
+            //        }
 
-                    // Get EC3 LoadCase
-                    var myEC3 = (Dlubal.STEEL_EC3.Module)model.GetModule("STEEL_EC3");
-                    Dlubal.STEEL_EC3.ICase myCaseEC3 = myEC3.moGetCase(1, ITEM_AT.AT_NO);
+            //        // Get EC3 LoadCase
+            //        var myEC3 = (Dlubal.STEEL_EC3.Module)model.GetModule("STEEL_EC3");
+            //        Dlubal.STEEL_EC3.ICase myCaseEC3 = myEC3.moGetCase(1, ITEM_AT.AT_NO);
 
-                    // Get Cross Sections
-                    // Select cross sections?
-                    var countCS = myCaseEC3.moGetCrossSectionsCount();
-                    for (int i = 0; i < countCS; i++)
-                    {
-                        Dlubal.STEEL_EC3.CROSS_SECTION myCSEC3 = myCaseEC3.moGetCrossSection(i + 1, ITEM_AT.AT_NO);
-                        myCSEC3.Optimization = 1;
-                        myCaseEC3.moSetCrossSection(myCSEC3.No, ITEM_AT.AT_NO, myCSEC3);
-                    }
+            //        // Get Cross Sections
+            //        // Select cross sections?
+            //        var countCS = myCaseEC3.moGetCrossSectionsCount();
+            //        for (int i = 0; i < countCS; i++)
+            //        {
+            //            Dlubal.STEEL_EC3.CROSS_SECTION myCSEC3 = myCaseEC3.moGetCrossSection(i + 1, ITEM_AT.AT_NO);
+            //            myCSEC3.Optimization = 1;
+            //            myCaseEC3.moSetCrossSection(myCSEC3.No, ITEM_AT.AT_NO, myCSEC3);
+            //        }
 
-                    // Berechnung durchführen
-                    var error = myCaseEC3.moCalculate();
+            //        // Berechnung durchführen
+            //        var error = myCaseEC3.moCalculate();
 
-                    //Querschnitt an RFEM übergeben.
-                    var myCSECRFEM = new List<CrossSection>();
-                    for (int i = 0; i < countCS; i++)
-                    {
-                        Dlubal.STEEL_EC3.CROSS_SECTION myCSEC3 = myCaseEC3.moGetCrossSection(i + 1, ITEM_AT.AT_NO);
-                        var myCS = data.GetCrossSection(i + 1, ItemAt.AtNo).GetData();
-                        myCS.TextID = myCSEC3.Description;
-                        myCS.Description = myCSEC3.Description;
-                        myCSECRFEM.Add(myCS);
-                    }
+            //        //Querschnitt an RFEM übergeben.
+            //        var myCSECRFEM = new List<CrossSection>();
+            //        for (int i = 0; i < countCS; i++)
+            //        {
+            //            Dlubal.STEEL_EC3.CROSS_SECTION myCSEC3 = myCaseEC3.moGetCrossSection(i + 1, ITEM_AT.AT_NO);
+            //            var myCS = data.GetCrossSection(i + 1, ItemAt.AtNo).GetData();
+            //            myCS.TextID = myCSEC3.Description;
+            //            myCS.Description = myCSEC3.Description;
+            //            myCSECRFEM.Add(myCS);
+            //        }
 
-                    // Set Data
-                    data.PrepareModification();
-                    foreach (var crosec in myCSECRFEM)
-                    {
-                        data.SetCrossSection(crosec);
-                    }
-                    data.FinishModification();
+            //        // Set Data
+            //        data.PrepareModification();
+            //        foreach (var crosec in myCSECRFEM)
+            //        {
+            //            data.SetCrossSection(crosec);
+            //        }
+            //        data.FinishModification();
 
-                    // Get steel mass
-                    var members = data.GetMembers();
-                    mass = members.Sum(item => item.Weight);
+            //        // Get steel mass
+            //        var members = data.GetMembers();
+            //        mass = members.Sum(item => item.Weight);
 
-                }
-                catch (Exception ex)
-                {
-                    Component_GetData.DisconnectRFEM(ref model, ref data);
-                    throw ex;
-                }
-            Component_GetData.DisconnectRFEM(ref model, ref data);
-            }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Component_GetData.DisconnectRFEM(ref model, ref data);
+            //        throw ex;
+            //    }
+            //Component_GetData.DisconnectRFEM(ref model, ref data);
+            //}
             // Assign Output
             DA.SetData(0, mass);
 

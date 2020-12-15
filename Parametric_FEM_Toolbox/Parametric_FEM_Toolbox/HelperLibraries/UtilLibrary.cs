@@ -1,12 +1,12 @@
-﻿using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+﻿
+
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dlubal.RFEM3;
+//using Dlubal.RFEM3;
 
 namespace Parametric_FEM_Toolbox.HelperLibraries
 {
@@ -160,47 +160,47 @@ namespace Parametric_FEM_Toolbox.HelperLibraries
             return outList;
         }
 
-        public static bool NullLineExists(IEnumerable<Dlubal.RFEM5.Line> alllines, IEnumerable<RFLine> edges, ref string boundarylinelist)
-        {
-            // In order to define quadrangles, at least four boundary lines are required.
-            // This method provides the only? way to create a suitable null line for the quad definition
-            var nodeNos = edges.Select(x => x.NodeList).SelectMany(x => x.ToInt()).ToList();
-            var hSetNodes = new HashSet<int>(nodeNos);
-            // Does a null line already exist?
-            foreach (var line in alllines)
-            {
-                foreach (var node in hSetNodes)
-                {
-                    var targetNodeList = node.ToString() + "," + node.ToString();
-                    if (line.NodeList == targetNodeList)
-                    {
-                        // Node list must be set either clockwise or counterclockwise
-                        var newboundarylist = new int[4];
-                        newboundarylist[0]=(line.No);
-                        foreach (var edge in edges)
-                        {
-                            var nodelist = edge.NodeList.ToInt();
-                            if (nodelist.Contains(node))
-                            {
-                                if (newboundarylist[1]==0)
-                                {
-                                    newboundarylist[1] = edge.No;
-                                }else
-                                {
-                                    newboundarylist[3] = edge.No;
-                                }
-                            }else
-                            {
-                                newboundarylist[2] = edge.No;
-                            }
-                        }
-                        boundarylinelist = string.Join(",", newboundarylist);
-                        return true;
-                    }
-                }
-            }
-            return false;            
-        }
+        //public static bool NullLineExists(IEnumerable<Dlubal.RFEM5.Line> alllines, IEnumerable<RFLine> edges, ref string boundarylinelist)
+        //{
+        //    // In order to define quadrangles, at least four boundary lines are required.
+        //    // This method provides the only? way to create a suitable null line for the quad definition
+        //    var nodeNos = edges.Select(x => x.NodeList).SelectMany(x => x.ToInt()).ToList();
+        //    var hSetNodes = new HashSet<int>(nodeNos);
+        //    // Does a null line already exist?
+        //    foreach (var line in alllines)
+        //    {
+        //        foreach (var node in hSetNodes)
+        //        {
+        //            var targetNodeList = node.ToString() + "," + node.ToString();
+        //            if (line.NodeList == targetNodeList)
+        //            {
+        //                // Node list must be set either clockwise or counterclockwise
+        //                var newboundarylist = new int[4];
+        //                newboundarylist[0]=(line.No);
+        //                foreach (var edge in edges)
+        //                {
+        //                    var nodelist = edge.NodeList.ToInt();
+        //                    if (nodelist.Contains(node))
+        //                    {
+        //                        if (newboundarylist[1]==0)
+        //                        {
+        //                            newboundarylist[1] = edge.No;
+        //                        }else
+        //                        {
+        //                            newboundarylist[3] = edge.No;
+        //                        }
+        //                    }else
+        //                    {
+        //                        newboundarylist[2] = edge.No;
+        //                    }
+        //                }
+        //                boundarylinelist = string.Join(",", newboundarylist);
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;            
+        //}
 
 
 
@@ -209,71 +209,71 @@ namespace Parametric_FEM_Toolbox.HelperLibraries
 
         #region Geometry
 
-        //Converts an RFEM Point3D into a Rhino Point3d and viceversa
-        public static Point3d ToPoint3d(this Point3D pt)
-        {
-            return new Point3d(pt.X, pt.Y, pt.Z);
-        }
-        public static Point3d[] ToPoint3d(this Point3D[] pts)
-        {
-            if (!(pts == null))
-            {
-                return Array.ConvertAll(pts, new Converter<Point3D, Point3d>(ToPoint3d));
-            }
-            return null;  
-        }
-        public static Point3d[,] ToPoint3d(this Point3D[,] pts)
-        {
-            if (!(pts == null))
-            {
-                var myPts = new Point3d[pts.GetLength(0), pts.GetLength(1)];
-                for (int i = 0; i < pts.GetLength(0); i++)
-                {
-                    for (int j = 0; j < pts.GetLength(1); j++)
-                    {
-                        myPts[i, j] = pts[i, j].ToPoint3d();
-                    }
-                }
-                return myPts;
-            }
-            return null;            
-        }
-        public static Point3d ToPoint3d(this Node n, IModelData data)
-        {
-            // A little bit of recursion in case the ref node has another ref node...
-            if (n.RefObjectNo == 0)
-            {
-                return new Point3d(n.X, n.Y, n.Z);
-            }
-            var refNode = data.GetNode(n.RefObjectNo, ItemAt.AtNo).GetData();
-            return new Point3d(new Point3d(n.X, n.Y, n.Z) + refNode.ToPoint3d(data));
-        }
-        public static Point3D ToPoint3D(this Point3d pt)
-        {
-            Point3D pt1 = new Point3D
-            {
-                X = pt.X,
-                Y = pt.Y,
-                Z = pt.Z
-            };
-            return pt1;
-        }
-        public static Point3D[] ToPoint3D(this Point3d[] pts)
-        {
-            return Array.ConvertAll(pts, new Converter<Point3d, Point3D>(ToPoint3D));
-        }
-        public static Point3D[,] ToPoint3D(this Point3d[,] pts)
-        {
-            var myPts = new Point3D[pts.GetLength(0), pts.GetLength(1)];
-            for (int i = 0; i < pts.GetLength(0); i++)
-            {
-                for (int j = 0; j < pts.GetLength(1); j++)
-                {
-                    myPts[i, j] = pts[i, j].ToPoint3D();
-                }
-            }
-            return myPts;
-        }
+        ////Converts an RFEM Point3D into a Rhino Point3d and viceversa
+        //public static Point3d ToPoint3d(this Point3D pt)
+        //{
+        //    return new Point3d(pt.X, pt.Y, pt.Z);
+        //}
+        //public static Point3d[] ToPoint3d(this Point3D[] pts)
+        //{
+        //    if (!(pts == null))
+        //    {
+        //        return Array.ConvertAll(pts, new Converter<Point3D, Point3d>(ToPoint3d));
+        //    }
+        //    return null;  
+        //}
+        //public static Point3d[,] ToPoint3d(this Point3D[,] pts)
+        //{
+        //    if (!(pts == null))
+        //    {
+        //        var myPts = new Point3d[pts.GetLength(0), pts.GetLength(1)];
+        //        for (int i = 0; i < pts.GetLength(0); i++)
+        //        {
+        //            for (int j = 0; j < pts.GetLength(1); j++)
+        //            {
+        //                myPts[i, j] = pts[i, j].ToPoint3d();
+        //            }
+        //        }
+        //        return myPts;
+        //    }
+        //    return null;            
+        //}
+        //public static Point3d ToPoint3d(this Node n, IModelData data)
+        //{
+        //    // A little bit of recursion in case the ref node has another ref node...
+        //    if (n.RefObjectNo == 0)
+        //    {
+        //        return new Point3d(n.X, n.Y, n.Z);
+        //    }
+        //    var refNode = data.GetNode(n.RefObjectNo, ItemAt.AtNo).GetData();
+        //    return new Point3d(new Point3d(n.X, n.Y, n.Z) + refNode.ToPoint3d(data));
+        //}
+        //public static Point3D ToPoint3D(this Point3d pt)
+        //{
+        //    Point3D pt1 = new Point3D
+        //    {
+        //        X = pt.X,
+        //        Y = pt.Y,
+        //        Z = pt.Z
+        //    };
+        //    return pt1;
+        //}
+        //public static Point3D[] ToPoint3D(this Point3d[] pts)
+        //{
+        //    return Array.ConvertAll(pts, new Converter<Point3d, Point3D>(ToPoint3D));
+        //}
+        //public static Point3D[,] ToPoint3D(this Point3d[,] pts)
+        //{
+        //    var myPts = new Point3D[pts.GetLength(0), pts.GetLength(1)];
+        //    for (int i = 0; i < pts.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < pts.GetLength(1); j++)
+        //        {
+        //            myPts[i, j] = pts[i, j].ToPoint3D();
+        //        }
+        //    }
+        //    return myPts;
+        //}
 
         public static string ToLabelString(this Point3d[,] pts)
         {
@@ -389,11 +389,11 @@ namespace Parametric_FEM_Toolbox.HelperLibraries
             return null;
         }
 
-        public static Point3d ToPoint3d (this Dlubal.RFEM3.IPOINT_2D point2D, bool scale = true)
-        {
-            var scaleFactor = Convert.ToDouble(scale) / 1000;
-            return new Point3d(point2D.x * scaleFactor, point2D.y * scaleFactor, 0);
-        }
+        //public static Point3d ToPoint3d (this Dlubal.RFEM3.IPOINT_2D point2D, bool scale = true)
+        //{
+        //    var scaleFactor = Convert.ToDouble(scale) / 1000;
+        //    return new Point3d(point2D.x * scaleFactor, point2D.y * scaleFactor, 0);
+        //}
 
 
         public static bool IsVertical(this Curve curve)

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -67,45 +67,45 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfMemberLoad = (RFMemberLoad)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfMemberLoad = (RFMemberLoad)inGH.Value;
 
-            // Output
-            DA.SetData(0, rfMemberLoad.MemberList);
-            DA.SetData(1, rfMemberLoad.No);
-            DA.SetData(2, rfMemberLoad.LoadCase);
-            DA.SetData(3, rfMemberLoad.Comment);
-            DA.SetData(4, rfMemberLoad.Magnitude1);
-            DA.SetData(5, rfMemberLoad.Magnitude2);
-            DA.SetData(6, rfMemberLoad.Magnitude3);
-            DA.SetData(7, rfMemberLoad.Magnitude4);
-            DA.SetData(8, rfMemberLoad.Magnitude5);
-            DA.SetData(9, rfMemberLoad.Magnitude6);
-            DA.SetData(10, rfMemberLoad.DistanceA);
-            DA.SetData(11, rfMemberLoad.DistanceB);
-            if (!(rfMemberLoad.LoadArray == null))
-            {
-                var distances = new List<double>();
-                var forces = new List<double>();
-                for (int i = 0; i < rfMemberLoad.LoadArray.GetUpperBound(0); i++)
-                {
-                    forces.Add(rfMemberLoad.LoadArray[i, 1]);
-                    distances.Add(rfMemberLoad.LoadArray[i, 0] / 100);
-                }
-                DA.SetDataList(12, forces);
-                DA.SetDataList(13, distances);
-            }
-            DA.SetData(14, rfMemberLoad.LoadType);
-            DA.SetData(15, rfMemberLoad.LoadDirType);
-            DA.SetData(16, rfMemberLoad.LoadDistType);
-            DA.SetData(17, rfMemberLoad.LoadRefType);
-            DA.SetData(18, rfMemberLoad.OverTotalLength);
-            DA.SetData(19, rfMemberLoad.RelativeDistances);
+            //// Output
+            //DA.SetData(0, rfMemberLoad.MemberList);
+            //DA.SetData(1, rfMemberLoad.No);
+            //DA.SetData(2, rfMemberLoad.LoadCase);
+            //DA.SetData(3, rfMemberLoad.Comment);
+            //DA.SetData(4, rfMemberLoad.Magnitude1);
+            //DA.SetData(5, rfMemberLoad.Magnitude2);
+            //DA.SetData(6, rfMemberLoad.Magnitude3);
+            //DA.SetData(7, rfMemberLoad.Magnitude4);
+            //DA.SetData(8, rfMemberLoad.Magnitude5);
+            //DA.SetData(9, rfMemberLoad.Magnitude6);
+            //DA.SetData(10, rfMemberLoad.DistanceA);
+            //DA.SetData(11, rfMemberLoad.DistanceB);
+            //if (!(rfMemberLoad.LoadArray == null))
+            //{
+            //    var distances = new List<double>();
+            //    var forces = new List<double>();
+            //    for (int i = 0; i < rfMemberLoad.LoadArray.GetUpperBound(0); i++)
+            //    {
+            //        forces.Add(rfMemberLoad.LoadArray[i, 1]);
+            //        distances.Add(rfMemberLoad.LoadArray[i, 0] / 100);
+            //    }
+            //    DA.SetDataList(12, forces);
+            //    DA.SetDataList(13, distances);
+            //}
+            //DA.SetData(14, rfMemberLoad.LoadType);
+            //DA.SetData(15, rfMemberLoad.LoadDirType);
+            //DA.SetData(16, rfMemberLoad.LoadDistType);
+            //DA.SetData(17, rfMemberLoad.LoadRefType);
+            //DA.SetData(18, rfMemberLoad.OverTotalLength);
+            //DA.SetData(19, rfMemberLoad.RelativeDistances);
         }
     }
 }

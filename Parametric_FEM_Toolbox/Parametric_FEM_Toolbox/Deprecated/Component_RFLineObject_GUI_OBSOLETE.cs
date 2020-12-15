@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -75,8 +75,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
             mngr.RegisterUnit(evaluationUnit);
 
             evaluationUnit.RegisterInputParam(new Param_String(), "NodeList", "NodeList", "Node List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "NodeList", "NodeList", "Node List", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Line Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(LineType)), GH_ParamAccess.item);
+           // evaluationUnit.RegisterInputParam(new Param_String(), "Line Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(LineType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
             evaluationUnit.RegisterInputParam(new Param_Number(), "Rotation Angle [°]", "β", "Rotation Angle [°]", GH_ParamAccess.item);
             evaluationUnit.Inputs[2].Parameter.Optional = true;
@@ -116,62 +117,62 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rFLine = new RFLine();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var nodeList = "";
-            var lineType = "";
-            var rotAngle = 0.0;
-            //int intPoints = 4;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rFLine = new RFLine();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var nodeList = "";
+            //var lineType = "";
+            //var rotAngle = 0.0;
+            ////int intPoints = 4;
+            ////int newNo = 0;
 
-            if (DA.GetData(6, ref inRFEM))
-            {
-                rFLine = new RFLine((RFLine)inRFEM.Value);
-            }else if (DA.GetData(0, ref inCurve))
-            {
-                Component_RFLine.SetGeometry(inCurve, ref rFLine);
-            }else
-            {
-                return;
-            }
-            if (DA.GetData(7, ref mod))
-            {
-                rFLine.ToModify = mod;
-            }
-            if (DA.GetData(8, ref del))
-            {
-                rFLine.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rFLine.No = noIndex;
-            }
-            if (DA.GetData(2, ref comment))
-            {
-                rFLine.Comment = comment;
-            }
-            if (DA.GetData(3, ref nodeList))
-            {
-                rFLine.NodeList = nodeList;
-            }
-            if (DA.GetData(4, ref lineType))
-            {
-                Enum.TryParse(lineType, out LineType myLineType);
-                rFLine.Type = myLineType;
-            }
-            if (DA.GetData(5, ref rotAngle))
-            {
-                rFLine.RotationType = RotationType.Angle;
-                rFLine.RotationAngle = rotAngle;
-            }
+            //if (DA.GetData(6, ref inRFEM))
+            //{
+            //    rFLine = new RFLine((RFLine)inRFEM.Value);
+            //}else if (DA.GetData(0, ref inCurve))
+            //{
+            //    Component_RFLine.SetGeometry(inCurve, ref rFLine);
+            //}else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(7, ref mod))
+            //{
+            //    rFLine.ToModify = mod;
+            //}
+            //if (DA.GetData(8, ref del))
+            //{
+            //    rFLine.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rFLine.No = noIndex;
+            //}
+            //if (DA.GetData(2, ref comment))
+            //{
+            //    rFLine.Comment = comment;
+            //}
+            //if (DA.GetData(3, ref nodeList))
+            //{
+            //    rFLine.NodeList = nodeList;
+            //}
+            //if (DA.GetData(4, ref lineType))
+            //{
+            //    Enum.TryParse(lineType, out LineType myLineType);
+            //    rFLine.Type = myLineType;
+            //}
+            //if (DA.GetData(5, ref rotAngle))
+            //{
+            //    rFLine.RotationType = RotationType.Angle;
+            //    rFLine.RotationAngle = rotAngle;
+            //}
 
-            DA.SetData(0, rFLine);
+            //DA.SetData(0, rFLine);
         }
 
         // Additonal functions

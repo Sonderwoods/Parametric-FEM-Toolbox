@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -58,15 +58,15 @@ namespace Parametric_FEM_Toolbox.GUI
             {
                 return;
             }
-            var rfLoadCombo = (RFResultCombo)inGH.Value;
+            //var rfLoadCombo = (RFResultCombo)inGH.Value;
 
             // Output            
-            DA.SetData(0, rfLoadCombo.No);
-            DA.SetData(1, rfLoadCombo.Definition);
-            DA.SetData(2, rfLoadCombo.Description);
-            DA.SetData(3, rfLoadCombo.DesignSituation);
-            DA.SetData(4, rfLoadCombo.Comment);
-            DA.SetData(5, rfLoadCombo.ToSolve);
+            //DA.SetData(0, rfLoadCombo.No);
+            //DA.SetData(1, rfLoadCombo.Definition);
+            //DA.SetData(2, rfLoadCombo.Description);
+            //DA.SetData(3, rfLoadCombo.DesignSituation);
+            //DA.SetData(4, rfLoadCombo.Comment);
+            //DA.SetData(5, rfLoadCombo.ToSolve);
         }
     }
 }

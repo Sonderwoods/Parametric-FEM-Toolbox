@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -78,8 +78,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
 
 
             evaluationUnit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Number", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Number", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Member Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(MemberType)), GH_ParamAccess.item);
+           // evaluationUnit.RegisterInputParam(new Param_String(), "Member Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(MemberType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
             evaluationUnit.RegisterInputParam(new Param_Number(), "Rotation Angle [°]", "β", "Rotation Angle [°]", GH_ParamAccess.item);
             evaluationUnit.Inputs[2].Parameter.Optional = true;
@@ -94,8 +95,9 @@ namespace Parametric_FEM_Toolbox.Deprecated
             evaluationUnit.RegisterInputParam(new Param_Integer(), "Eccentricity", "Ecc", "Number of Eccentricity", GH_ParamAccess.item);
             evaluationUnit.Inputs[6].Parameter.Optional = true;
             evaluationUnit.RegisterInputParam(new Param_Integer(), "Division", "Div", "Number of Division", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_Integer(), "Division", "Div", "Number of Division", GH_ParamAccess.item);
             evaluationUnit.Inputs[7].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Taper Shape", "Taper", UtilLibrary.DescriptionRFTypes(typeof(TaperShapeType)), GH_ParamAccess.item);
+           // evaluationUnit.RegisterInputParam(new Param_String(), "Taper Shape", "Taper", UtilLibrary.DescriptionRFTypes(typeof(TaperShapeType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[8].Parameter.Optional = true;
 
             evaluationUnit.RegisterInputParam(new Param_RFEM(), "Member", "Member", "Member object from the RFEM model to modify", GH_ParamAccess.item);
@@ -131,102 +133,102 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rFMember = new RFMember();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var lineNo = 0;
-            var memberType = "";
-            var taperType = "";
-            var rotAngle = 0.0;
-            //var intPoints = 4;
-            var sCS = 0;
-            var eCS = 0;
-            var sH = 0;
-            var eH = 0;
-            var ecc = 0;
-            var div = 0;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rFMember = new RFMember();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var lineNo = 0;
+            //var memberType = "";
+            //var taperType = "";
+            //var rotAngle = 0.0;
+            ////var intPoints = 4;
+            //var sCS = 0;
+            //var eCS = 0;
+            //var sH = 0;
+            //var eH = 0;
+            //var ecc = 0;
+            //var div = 0;
+            ////int newNo = 0;
 
-            if (DA.GetData(13, ref inRFEM))
-            {
-                rFMember = new RFMember((RFMember)inRFEM.Value);
-                if (DA.GetData(1, ref sCS))
-                {
-                    rFMember.StartCrossSectionNo = sCS;
-                }
-            }
-            else if (DA.GetData(0, ref inCurve) && DA.GetData(1, ref sCS))
-            {
-                var myRFLine = new RFLine();
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                rFMember.BaseLine = myRFLine;
-                rFMember.StartCrossSectionNo = sCS;
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(14, ref mod))
-            {
-                rFMember.ToModify = mod;
-            }
-            if (DA.GetData(15, ref del))
-            {
-                rFMember.ToDelete = del;
-            }
-            if (DA.GetData(2, ref noIndex))
-            {
-                rFMember.No = noIndex;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rFMember.Comment = comment;
-            }
-            if (DA.GetData(4, ref lineNo))
-            {
-                rFMember.LineNo = lineNo;
-            }
-            if (DA.GetData(5, ref memberType))
-            {
-                Enum.TryParse(memberType, out MemberType myMemberType);
-                rFMember.Type = myMemberType;
-            }
-            if (DA.GetData(6, ref rotAngle))
-            {
-                rFMember.RotationType = RotationType.Angle;
-                rFMember.RotationAngle = rotAngle;
-            }
-            if (DA.GetData(7, ref eCS))
-            {
-                rFMember.EndCrossSectionNo = eCS;
-            }
-            if (DA.GetData(8, ref sH))
-            {
-                rFMember.StartHingeNo = sH;
-            }
-            if (DA.GetData(9, ref eH))
-            {
-                rFMember.EndHingeNo = eH;
-            }
-            if (DA.GetData(10, ref ecc))
-            {
-                rFMember.EccentricityNo = ecc;
-            }
-            if (DA.GetData(11, ref div))
-            {
-                rFMember.DivisionNo = div;
-            }
-            if (DA.GetData(12, ref taperType))
-            {
-                Enum.TryParse(taperType, out TaperShapeType myTaperType);
-                rFMember.TaperShape = myTaperType;
-            }
-            DA.SetData(0, rFMember);
+            //if (DA.GetData(13, ref inRFEM))
+            //{
+            //    rFMember = new RFMember((RFMember)inRFEM.Value);
+            //    if (DA.GetData(1, ref sCS))
+            //    {
+            //        rFMember.StartCrossSectionNo = sCS;
+            //    }
+            //}
+            //else if (DA.GetData(0, ref inCurve) && DA.GetData(1, ref sCS))
+            //{
+            //    var myRFLine = new RFLine();
+            //    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //    rFMember.BaseLine = myRFLine;
+            //    rFMember.StartCrossSectionNo = sCS;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(14, ref mod))
+            //{
+            //    rFMember.ToModify = mod;
+            //}
+            //if (DA.GetData(15, ref del))
+            //{
+            //    rFMember.ToDelete = del;
+            //}
+            //if (DA.GetData(2, ref noIndex))
+            //{
+            //    rFMember.No = noIndex;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rFMember.Comment = comment;
+            //}
+            //if (DA.GetData(4, ref lineNo))
+            //{
+            //    rFMember.LineNo = lineNo;
+            //}
+            //if (DA.GetData(5, ref memberType))
+            //{
+            //    Enum.TryParse(memberType, out MemberType myMemberType);
+            //    rFMember.Type = myMemberType;
+            //}
+            //if (DA.GetData(6, ref rotAngle))
+            //{
+            //    rFMember.RotationType = RotationType.Angle;
+            //    rFMember.RotationAngle = rotAngle;
+            //}
+            //if (DA.GetData(7, ref eCS))
+            //{
+            //    rFMember.EndCrossSectionNo = eCS;
+            //}
+            //if (DA.GetData(8, ref sH))
+            //{
+            //    rFMember.StartHingeNo = sH;
+            //}
+            //if (DA.GetData(9, ref eH))
+            //{
+            //    rFMember.EndHingeNo = eH;
+            //}
+            //if (DA.GetData(10, ref ecc))
+            //{
+            //    rFMember.EccentricityNo = ecc;
+            //}
+            //if (DA.GetData(11, ref div))
+            //{
+            //    rFMember.DivisionNo = div;
+            //}
+            //if (DA.GetData(12, ref taperType))
+            //{
+            //    Enum.TryParse(taperType, out TaperShapeType myTaperType);
+            //    rFMember.TaperShape = myTaperType;
+            //}
+            //DA.SetData(0, rFMember);
         }
 
         // Additonal functions

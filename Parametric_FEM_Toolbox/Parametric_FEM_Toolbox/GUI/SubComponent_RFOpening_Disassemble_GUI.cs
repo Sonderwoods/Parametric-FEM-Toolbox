@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -53,22 +53,22 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfOpening = (RFOpening)inGH.Value;
-            // Output
-            if (rfOpening.IsPlanar())
-            {
-                DA.SetData(0, rfOpening.ToPlanarBrep());
-            }
-            DA.SetData(1, rfOpening.No);
-            DA.SetData(2, rfOpening.InSurfaceNo);
-            DA.SetData(3, rfOpening.Comment);
-            DA.SetData(4, rfOpening.BoundaryLineList);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfOpening = (RFOpening)inGH.Value;
+            //// Output
+            //if (rfOpening.IsPlanar())
+            //{
+            //    DA.SetData(0, rfOpening.ToPlanarBrep());
+            //}
+            //DA.SetData(1, rfOpening.No);
+            //DA.SetData(2, rfOpening.InSurfaceNo);
+            //DA.SetData(3, rfOpening.Comment);
+            //DA.SetData(4, rfOpening.BoundaryLineList);
 
         }
     }

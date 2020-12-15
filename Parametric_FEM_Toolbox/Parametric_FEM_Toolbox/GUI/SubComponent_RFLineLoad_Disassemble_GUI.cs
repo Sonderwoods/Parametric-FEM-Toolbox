@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -65,43 +65,43 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfLineLoad = (RFLineLoad)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfLineLoad = (RFLineLoad)inGH.Value;
 
-            // Output
-            DA.SetDataList(0, rfLineLoad.BaseLines);
-            DA.SetData(1, rfLineLoad.No);
-            DA.SetData(2, rfLineLoad.LoadCase);
-            DA.SetData(3, rfLineLoad.Comment);
-            DA.SetData(4, rfLineLoad.Magnitude1);
-            DA.SetData(5, rfLineLoad.Magnitude2);
-            DA.SetData(6, rfLineLoad.Magnitude3);
-            DA.SetData(7, rfLineLoad.LineList);
-            DA.SetData(8, rfLineLoad.DistanceA);
-            DA.SetData(9, rfLineLoad.DistanceB);
-            if (!(rfLineLoad.LoadArray == null))
-            {
-                var distances = new List<double>();
-                var forces = new List<double>();
-                for (int i = 0; i < rfLineLoad.LoadArray.GetUpperBound(0); i++)
-                {
-                    forces.Add(rfLineLoad.LoadArray[i, 1]);
-                    distances.Add(rfLineLoad.LoadArray[i, 0] / 100);
-                }
-                DA.SetDataList(10, forces);
-                DA.SetDataList(11, distances);
-            }
-            DA.SetData(12, rfLineLoad.LoadType);
-            DA.SetData(13, rfLineLoad.LoadDirType);
-            DA.SetData(14, rfLineLoad.LoadDistType);
-            DA.SetData(15, rfLineLoad.LoadRefType);
-            DA.SetData(16, rfLineLoad.OverTotalLength);
-            DA.SetData(17, rfLineLoad.RelativeDistances);
+            //// Output
+            //DA.SetDataList(0, rfLineLoad.BaseLines);
+            //DA.SetData(1, rfLineLoad.No);
+            //DA.SetData(2, rfLineLoad.LoadCase);
+            //DA.SetData(3, rfLineLoad.Comment);
+            //DA.SetData(4, rfLineLoad.Magnitude1);
+            //DA.SetData(5, rfLineLoad.Magnitude2);
+            //DA.SetData(6, rfLineLoad.Magnitude3);
+            //DA.SetData(7, rfLineLoad.LineList);
+            //DA.SetData(8, rfLineLoad.DistanceA);
+            //DA.SetData(9, rfLineLoad.DistanceB);
+            //if (!(rfLineLoad.LoadArray == null))
+            //{
+            //    var distances = new List<double>();
+            //    var forces = new List<double>();
+            //    for (int i = 0; i < rfLineLoad.LoadArray.GetUpperBound(0); i++)
+            //    {
+            //        forces.Add(rfLineLoad.LoadArray[i, 1]);
+            //        distances.Add(rfLineLoad.LoadArray[i, 0] / 100);
+            //    }
+            //    DA.SetDataList(10, forces);
+            //    DA.SetDataList(11, distances);
+            //}
+            //DA.SetData(12, rfLineLoad.LoadType);
+            //DA.SetData(13, rfLineLoad.LoadDirType);
+            //DA.SetData(14, rfLineLoad.LoadDistType);
+            //DA.SetData(15, rfLineLoad.LoadRefType);
+            //DA.SetData(16, rfLineLoad.OverTotalLength);
+            //DA.SetData(17, rfLineLoad.RelativeDistances);
         }
     }
 }

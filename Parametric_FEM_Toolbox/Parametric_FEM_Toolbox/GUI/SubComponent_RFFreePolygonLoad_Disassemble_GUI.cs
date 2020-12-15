@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -63,31 +63,31 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfPolyLoad = (RFFreePolygonLoad)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfPolyLoad = (RFFreePolygonLoad)inGH.Value;
 
-            // Output            
-            DA.SetData(0, rfPolyLoad.No);
-            DA.SetData(1, rfPolyLoad.LoadCase);
-            DA.SetData(2, rfPolyLoad.Comment);
-            DA.SetDataList(3, rfPolyLoad.Polygon);
-            DA.SetData(4, rfPolyLoad.Magnitude1);
-            DA.SetData(5, rfPolyLoad.Magnitude2);
-            DA.SetData(6, rfPolyLoad.Magnitude3);
-            DA.SetData(7, rfPolyLoad.SurfaceList);
-            DA.SetData(8, rfPolyLoad.CornerPointList);
-            DA.SetData(9, rfPolyLoad.Position);
-            DA.SetData(10, rfPolyLoad.Node1No);
-            DA.SetData(11, rfPolyLoad.Node2No);
-            DA.SetData(12, rfPolyLoad.Node3No);
-            DA.SetData(13, rfPolyLoad.ProjectionType);
-            DA.SetData(14, rfPolyLoad.LoadDirType);
-            DA.SetData(15, rfPolyLoad.LoadDistType);
+            //// Output            
+            //DA.SetData(0, rfPolyLoad.No);
+            //DA.SetData(1, rfPolyLoad.LoadCase);
+            //DA.SetData(2, rfPolyLoad.Comment);
+            //DA.SetDataList(3, rfPolyLoad.Polygon);
+            //DA.SetData(4, rfPolyLoad.Magnitude1);
+            //DA.SetData(5, rfPolyLoad.Magnitude2);
+            //DA.SetData(6, rfPolyLoad.Magnitude3);
+            //DA.SetData(7, rfPolyLoad.SurfaceList);
+            //DA.SetData(8, rfPolyLoad.CornerPointList);
+            //DA.SetData(9, rfPolyLoad.Position);
+            //DA.SetData(10, rfPolyLoad.Node1No);
+            //DA.SetData(11, rfPolyLoad.Node2No);
+            //DA.SetData(12, rfPolyLoad.Node3No);
+            //DA.SetData(13, rfPolyLoad.ProjectionType);
+            //DA.SetData(14, rfPolyLoad.LoadDirType);
+            //DA.SetData(15, rfPolyLoad.LoadDistType);
         }
     }
 }

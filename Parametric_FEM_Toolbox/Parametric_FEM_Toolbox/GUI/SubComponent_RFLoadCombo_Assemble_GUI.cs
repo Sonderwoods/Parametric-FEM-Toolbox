@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -48,13 +48,13 @@ namespace Parametric_FEM_Toolbox.GUI
             GH_ExtendableMenu gH_ExtendableMenu = new GH_ExtendableMenu(0, "advanced");
             gH_ExtendableMenu.Name = "Advanced";
             gH_ExtendableMenu.Collapse();
-            unit.RegisterInputParam(new Param_Integer(), "Design Situation", "Design", UtilLibrary.DescriptionRFTypes(typeof(DesignSituationType)), GH_ParamAccess.item);
-            unit.Inputs[4].EnumInput = UtilLibrary.ListRFTypes(typeof(DesignSituationType));
-            unit.Inputs[4].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Boolean(), "To Solve", "Solve", "Solve Load Combination?", GH_ParamAccess.item);
-            unit.Inputs[5].Parameter.Optional = true;
-            gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[4]);
-            gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[5]);
+            //unit.RegisterInputParam(new Param_Integer(), "Design Situation", "Design", UtilLibrary.DescriptionRFTypes(typeof(DesignSituationType)), GH_ParamAccess.item);
+            //unit.Inputs[4].EnumInput = UtilLibrary.ListRFTypes(typeof(DesignSituationType));
+            //unit.Inputs[4].Parameter.Optional = true;
+            //unit.RegisterInputParam(new Param_Boolean(), "To Solve", "Solve", "Solve Load Combination?", GH_ParamAccess.item);
+            //unit.Inputs[5].Parameter.Optional = true;
+            //gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[4]);
+            //gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[5]);
             unit.AddMenu(gH_ExtendableMenu);
 
             GH_ExtendableMenu gH_ExtendableMenu2 = new GH_ExtendableMenu(1, "modify");
@@ -79,76 +79,76 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            var noIndex = 0;
-            var comment = "";
-            var description = "";
-            var definition = "";
-            var rfLoadCcombo = new RFLoadCombo();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var toSolve = true;
-            var design = 0;
+            //var noIndex = 0;
+            //var comment = "";
+            //var description = "";
+            //var definition = "";
+            //var rfLoadCcombo = new RFLoadCombo();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var toSolve = true;
+            //var design = 0;
 
 
-            if (DA.GetData(6, ref inRFEM))
-            {
-                rfLoadCcombo = new RFLoadCombo((RFLoadCombo)inRFEM.Value);
-                if (DA.GetData(1, ref definition))
-                {
-                    rfLoadCcombo.Definition = definition;
-                }
-                if (DA.GetData(0, ref noIndex))
-                {
-                    rfLoadCcombo.No = noIndex;
-                }
-            }
-            else if  (DA.GetData(0, ref noIndex) && (DA.GetData(1, ref definition)))
-            {
-                rfLoadCcombo.No = noIndex;
-                rfLoadCcombo.Definition = definition;
-                // Set ToSolve = true
-                rfLoadCcombo.ToSolve = true;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Load Case Number and Definition or existing RFLoadCombo Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(7, ref mod))
-            {
-                rfLoadCcombo.ToModify = mod;
-            }
-            if (DA.GetData(8, ref del))
-            {
-                rfLoadCcombo.ToDelete = del;
-            }
-            if (DA.GetData(2, ref description))
-            {
-                rfLoadCcombo.Description = description;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rfLoadCcombo.Comment = comment;
-            }
-            if (DA.GetData(4, ref design))
-            {
-                rfLoadCcombo.DesignSituation = (DesignSituationType)design;
-            }
-            if (DA.GetData(5, ref toSolve))
-            {
-                rfLoadCcombo.ToSolve = toSolve;
-            }
+            //if (DA.GetData(6, ref inRFEM))
+            //{
+            //    rfLoadCcombo = new RFLoadCombo((RFLoadCombo)inRFEM.Value);
+            //    if (DA.GetData(1, ref definition))
+            //    {
+            //        rfLoadCcombo.Definition = definition;
+            //    }
+            //    if (DA.GetData(0, ref noIndex))
+            //    {
+            //        rfLoadCcombo.No = noIndex;
+            //    }
+            //}
+            //else if  (DA.GetData(0, ref noIndex) && (DA.GetData(1, ref definition)))
+            //{
+            //    rfLoadCcombo.No = noIndex;
+            //    rfLoadCcombo.Definition = definition;
+            //    // Set ToSolve = true
+            //    rfLoadCcombo.ToSolve = true;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Load Case Number and Definition or existing RFLoadCombo Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(7, ref mod))
+            //{
+            //    rfLoadCcombo.ToModify = mod;
+            //}
+            //if (DA.GetData(8, ref del))
+            //{
+            //    rfLoadCcombo.ToDelete = del;
+            //}
+            //if (DA.GetData(2, ref description))
+            //{
+            //    rfLoadCcombo.Description = description;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rfLoadCcombo.Comment = comment;
+            //}
+            //if (DA.GetData(4, ref design))
+            //{
+            //    rfLoadCcombo.DesignSituation = (DesignSituationType)design;
+            //}
+            //if (DA.GetData(5, ref toSolve))
+            //{
+            //    rfLoadCcombo.ToSolve = toSolve;
+            //}
 
-            // Check Action Category
-            if (rfLoadCcombo.DesignSituation == DesignSituationType.UnknownDesignSituation)
-            {
-                msg = "Design Situation Type not supported. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }            
-            DA.SetData(0, rfLoadCcombo);
+            //// Check Action Category
+            //if (rfLoadCcombo.DesignSituation == DesignSituationType.UnknownDesignSituation)
+            //{
+            //    msg = "Design Situation Type not supported. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}            
+            //DA.SetData(0, rfLoadCcombo);
         }
     }
 }

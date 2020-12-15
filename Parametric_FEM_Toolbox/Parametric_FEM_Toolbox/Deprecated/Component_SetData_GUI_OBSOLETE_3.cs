@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.Utilities;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.GUI
@@ -19,26 +19,26 @@ namespace Parametric_FEM_Toolbox.GUI
     public class Component_SetData_GUI_OBSOLETE_3 : GH_SwitcherComponent
     {
         // Declare class variables outside the method "SolveInstance" so their values persist 
-        // when the method is called again.
-        List<RFNode> nodesNo = new List<RFNode>();
-        List<RFLine> linesNo = new List<RFLine>();
-        List<RFMember> membersNo = new List<RFMember>();
-        List<RFSurface> srfcNo = new List<RFSurface>();
-        List<RFOpening> opNo = new List<RFOpening>();
-        List<RFSupportP> nodSupNo = new List<RFSupportP>();
-        List<RFSupportL> lineSupNo = new List<RFSupportL>();
-        List<RFSupportS> sfcSupNo = new List<RFSupportS>();
-        List<RFLineHinge> lineHingeNo = new List<RFLineHinge>();
-        List<RFCroSec> croSecNo = new List<RFCroSec>();
-        List<RFMaterial> matNo = new List<RFMaterial>();
-        List<RFNodalLoad> nodalLoadNo = new List<RFNodalLoad>();
-        List<RFLineLoad> lineLoadNo = new List<RFLineLoad>();
-        List<RFMemberLoad> memberLoadNo = new List<RFMemberLoad>();
-        List<RFSurfaceLoad> surfaceLoadNo = new List<RFSurfaceLoad>();
-        List<RFFreePolygonLoad> polyLoadNo = new List<RFFreePolygonLoad>();
-        List<RFLoadCase> loadcaseNo = new List<RFLoadCase>();
-        List<RFLoadCombo> loadcomboNo = new List<RFLoadCombo>();
-        List<RFResultCombo> resultcomboNo = new List<RFResultCombo>();
+        //// when the method is called again.
+        //List<RFNode> nodesNo = new List<RFNode>();
+        //List<RFLine> linesNo = new List<RFLine>();
+        //List<RFMember> membersNo = new List<RFMember>();
+        //List<RFSurface> srfcNo = new List<RFSurface>();
+        //List<RFOpening> opNo = new List<RFOpening>();
+        //List<RFSupportP> nodSupNo = new List<RFSupportP>();
+        //List<RFSupportL> lineSupNo = new List<RFSupportL>();
+        //List<RFSupportS> sfcSupNo = new List<RFSupportS>();
+        //List<RFLineHinge> lineHingeNo = new List<RFLineHinge>();
+        //List<RFCroSec> croSecNo = new List<RFCroSec>();
+        //List<RFMaterial> matNo = new List<RFMaterial>();
+        //List<RFNodalLoad> nodalLoadNo = new List<RFNodalLoad>();
+        //List<RFLineLoad> lineLoadNo = new List<RFLineLoad>();
+        //List<RFMemberLoad> memberLoadNo = new List<RFMemberLoad>();
+        //List<RFSurfaceLoad> surfaceLoadNo = new List<RFSurfaceLoad>();
+        //List<RFFreePolygonLoad> polyLoadNo = new List<RFFreePolygonLoad>();
+        //List<RFLoadCase> loadcaseNo = new List<RFLoadCase>();
+        //List<RFLoadCombo> loadcomboNo = new List<RFLoadCombo>();
+        //List<RFResultCombo> resultcomboNo = new List<RFResultCombo>();
 
         int modelDataCount = 0;
         int modelDataCount2 = 0;
@@ -242,195 +242,195 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             var run = false;
 
-            var ghNodes = new List<GH_RFEM>();
-            var ghLines = new List<GH_RFEM>();
-            var ghMembers = new List<GH_RFEM>();
-            var ghSfcs = new List<GH_RFEM>();
-            var ghOps = new List<GH_RFEM>();
-            var ghSupsP = new List<GH_RFEM>();
-            var ghSupsL = new List<GH_RFEM>();
-            var ghSupsS = new List<GH_RFEM>();
-            var ghLHs = new List<GH_RFEM>();
-            var ghCSs = new List<GH_RFEM>();
-            var ghMats = new List<GH_RFEM>();
+            //var ghNodes = new List<GH_RFEM>();
+            //var ghLines = new List<GH_RFEM>();
+            //var ghMembers = new List<GH_RFEM>();
+            //var ghSfcs = new List<GH_RFEM>();
+            //var ghOps = new List<GH_RFEM>();
+            //var ghSupsP = new List<GH_RFEM>();
+            //var ghSupsL = new List<GH_RFEM>();
+            //var ghSupsS = new List<GH_RFEM>();
+            //var ghLHs = new List<GH_RFEM>();
+            //var ghCSs = new List<GH_RFEM>();
+            //var ghMats = new List<GH_RFEM>();
 
-            var ghNodalLoads = new List<GH_RFEM>();
-            var ghLineLoads = new List<GH_RFEM>();
-            var ghMemberLoads = new List<GH_RFEM>();
-            var ghSurfaceLoads = new List<GH_RFEM>();
-            var ghPolyLoads = new List<GH_RFEM>();
+            //var ghNodalLoads = new List<GH_RFEM>();
+            //var ghLineLoads = new List<GH_RFEM>();
+            //var ghMemberLoads = new List<GH_RFEM>();
+            //var ghSurfaceLoads = new List<GH_RFEM>();
+            //var ghPolyLoads = new List<GH_RFEM>();
 
-            var ghLoadCases = new List<GH_RFEM>();
-            var ghLoadCombos = new List<GH_RFEM>();
-            var ghResultCombos = new List<GH_RFEM>();
+            //var ghLoadCases = new List<GH_RFEM>();
+            //var ghLoadCombos = new List<GH_RFEM>();
+            //var ghResultCombos = new List<GH_RFEM>();
 
-            var modelName = "";
-            IModel model = null;
-            IModelData data = null;
-            ILoads loads = null;
+            //var modelName = "";
+            //IModel model = null;
+            //IModelData data = null;
+            //ILoads loads = null;
 
-            var errorMsg = new List<string>();
+            //var errorMsg = new List<string>();
 
-            DA.GetData(0, ref run);
-            if (run)
-            {
-                Component_SetData.ClearOutput(ref nodesNo, ref linesNo, ref membersNo, ref srfcNo, ref opNo, ref nodSupNo, ref lineSupNo, ref sfcSupNo,
-                    ref lineHingeNo, ref croSecNo, ref matNo, ref nodalLoadNo, ref lineLoadNo, ref memberLoadNo, ref surfaceLoadNo,
-                    ref polyLoadNo, ref loadcaseNo, ref loadcomboNo, ref resultcomboNo);
-                if (!DA.GetData(modelDataCount3+1, ref modelName))
-                {
-                    Component_GetData.ConnectRFEM(ref model, ref data);
-                }else
-                {
-                    Component_GetData.ConnectRFEM(modelName, ref model, ref data);
-                }
-                try
-                {
-                    // Set data
-                    data.PrepareModification();
-                    if (DA.GetDataList(10, ghMats))
-                    {
-                        data.SetRFMaterials(ghMats, ref matNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(9, ghCSs))
-                    {
-                        data.SetRFCroSecs(ghCSs, ref croSecNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(1, ghNodes))
-                    {
-                        data.SetRFNodes(ghNodes, ref nodesNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(2, ghLines))
-                    {
-                        data.SetRFLines(ghLines, ref linesNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(3, ghMembers))
-                    {
-                        data.SetRFMembers(ghMembers, ref membersNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(4, ghSfcs))
-                    {
-                        data.SetRFSurfaces(ghSfcs, ref srfcNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(5, ghOps))
-                    {
-                        data.SetRFOpenings(ghOps, ref opNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(6, ghSupsP))
-                    {
-                        data.SetRFSupportsP(ghSupsP, ref nodSupNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(7, ghSupsL))
-                    {
-                        data.SetRFSupportsL(ghSupsL, ref lineSupNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(8, ghLHs))
-                    {
-                        data.SetRFLineHinges(ghLHs, ref lineHingeNo, ref errorMsg);
-                    }
-                    data.FinishModification();
-                    // Set Load Cases and Combos
-                    if (DA.GetDataList(modelDataCount2 + 1, ghLoadCases))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFLoadCases(loads, ghLoadCases, ref loadcaseNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount2 + 2, ghLoadCombos))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFLoadCombos(loads, ghLoadCombos, ref loadcomboNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount2 + 3, ghResultCombos))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFResultCombos(loads, ghLoadCases, ref resultcomboNo, ref errorMsg);
-                    }
-                    // Set Loads
-                    if (DA.GetDataList(modelDataCount + 1, ghNodalLoads))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFNodalLoads(loads, ghNodalLoads, ref nodalLoadNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount+2, ghLineLoads))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }                        
-                        data.SetRFLineLoads(loads, ghLineLoads, ref lineLoadNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount + 3, ghMemberLoads))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFMemberLoads(loads, ghMemberLoads, ref memberLoadNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount + 4, ghSurfaceLoads))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFSurfaceLoads(loads, ghSurfaceLoads, ref surfaceLoadNo, ref errorMsg);
-                    }
-                    if (DA.GetDataList(modelDataCount + 5, ghPolyLoads))
-                    {
-                        if (loads == null)
-                        {
-                            Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                        }
-                        data.SetRFFreePolygonLoads(loads, ghPolyLoads, ref polyLoadNo, ref errorMsg);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Component_SetData.ClearOutput(ref nodesNo, ref linesNo, ref membersNo, ref srfcNo, ref opNo, ref nodSupNo, ref lineSupNo, ref sfcSupNo,
-                        ref lineHingeNo, ref croSecNo, ref matNo, ref nodalLoadNo, ref lineLoadNo, ref memberLoadNo, ref surfaceLoadNo,
-                        ref polyLoadNo, ref loadcaseNo, ref loadcomboNo, ref resultcomboNo);
-                    Component_GetData.DisconnectRFEM(ref model, ref data);
-                    throw ex;
-                }
-            Component_GetData.DisconnectRFEM(ref model, ref data);
-            }
-            // Assign Output
-            DA.SetDataList(0, nodesNo);
-            DA.SetDataList(1, linesNo);
-            DA.SetDataList(2, membersNo);
-            DA.SetDataList(3, srfcNo);
-            DA.SetDataList(4, opNo);
-            DA.SetDataList(5, nodSupNo);
-            DA.SetDataList(6, lineSupNo);
-            DA.SetDataList(7, lineHingeNo);
-            DA.SetDataList(8, croSecNo);
-            DA.SetDataList(9, matNo);
-            DA.SetDataList(10, nodalLoadNo);
-            DA.SetDataList(11, lineLoadNo);
-            DA.SetDataList(12, memberLoadNo);
-            DA.SetDataList(13, surfaceLoadNo);
-            DA.SetDataList(14, polyLoadNo);
-            DA.SetDataList(15, loadcaseNo);
-            DA.SetDataList(16, loadcomboNo);
-            DA.SetDataList(17, resultcomboNo);
+            //DA.GetData(0, ref run);
+            //if (run)
+            //{
+            //    Component_SetData.ClearOutput(ref nodesNo, ref linesNo, ref membersNo, ref srfcNo, ref opNo, ref nodSupNo, ref lineSupNo, ref sfcSupNo,
+            //        ref lineHingeNo, ref croSecNo, ref matNo, ref nodalLoadNo, ref lineLoadNo, ref memberLoadNo, ref surfaceLoadNo,
+            //        ref polyLoadNo, ref loadcaseNo, ref loadcomboNo, ref resultcomboNo);
+            //    if (!DA.GetData(modelDataCount3+1, ref modelName))
+            //    {
+            //        Component_GetData.ConnectRFEM(ref model, ref data);
+            //    }else
+            //    {
+            //        Component_GetData.ConnectRFEM(modelName, ref model, ref data);
+            //    }
+            //    try
+            //    {
+            //        // Set data
+            //        data.PrepareModification();
+            //        if (DA.GetDataList(10, ghMats))
+            //        {
+            //            data.SetRFMaterials(ghMats, ref matNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(9, ghCSs))
+            //        {
+            //            data.SetRFCroSecs(ghCSs, ref croSecNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(1, ghNodes))
+            //        {
+            //            data.SetRFNodes(ghNodes, ref nodesNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(2, ghLines))
+            //        {
+            //            data.SetRFLines(ghLines, ref linesNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(3, ghMembers))
+            //        {
+            //            data.SetRFMembers(ghMembers, ref membersNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(4, ghSfcs))
+            //        {
+            //            data.SetRFSurfaces(ghSfcs, ref srfcNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(5, ghOps))
+            //        {
+            //            data.SetRFOpenings(ghOps, ref opNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(6, ghSupsP))
+            //        {
+            //            data.SetRFSupportsP(ghSupsP, ref nodSupNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(7, ghSupsL))
+            //        {
+            //            data.SetRFSupportsL(ghSupsL, ref lineSupNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(8, ghLHs))
+            //        {
+            //            data.SetRFLineHinges(ghLHs, ref lineHingeNo, ref errorMsg);
+            //        }
+            //        data.FinishModification();
+            //        // Set Load Cases and Combos
+            //        if (DA.GetDataList(modelDataCount2 + 1, ghLoadCases))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFLoadCases(loads, ghLoadCases, ref loadcaseNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount2 + 2, ghLoadCombos))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFLoadCombos(loads, ghLoadCombos, ref loadcomboNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount2 + 3, ghResultCombos))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFResultCombos(loads, ghLoadCases, ref resultcomboNo, ref errorMsg);
+            //        }
+            //        // Set Loads
+            //        if (DA.GetDataList(modelDataCount + 1, ghNodalLoads))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFNodalLoads(loads, ghNodalLoads, ref nodalLoadNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount+2, ghLineLoads))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }                        
+            //            data.SetRFLineLoads(loads, ghLineLoads, ref lineLoadNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount + 3, ghMemberLoads))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFMemberLoads(loads, ghMemberLoads, ref memberLoadNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount + 4, ghSurfaceLoads))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFSurfaceLoads(loads, ghSurfaceLoads, ref surfaceLoadNo, ref errorMsg);
+            //        }
+            //        if (DA.GetDataList(modelDataCount + 5, ghPolyLoads))
+            //        {
+            //            if (loads == null)
+            //            {
+            //                Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //            }
+            //            data.SetRFFreePolygonLoads(loads, ghPolyLoads, ref polyLoadNo, ref errorMsg);
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Component_SetData.ClearOutput(ref nodesNo, ref linesNo, ref membersNo, ref srfcNo, ref opNo, ref nodSupNo, ref lineSupNo, ref sfcSupNo,
+            //            ref lineHingeNo, ref croSecNo, ref matNo, ref nodalLoadNo, ref lineLoadNo, ref memberLoadNo, ref surfaceLoadNo,
+            //            ref polyLoadNo, ref loadcaseNo, ref loadcomboNo, ref resultcomboNo);
+            //        Component_GetData.DisconnectRFEM(ref model, ref data);
+            //        throw ex;
+            //    }
+            //Component_GetData.DisconnectRFEM(ref model, ref data);
+            //}
+            //// Assign Output
+            //DA.SetDataList(0, nodesNo);
+            //DA.SetDataList(1, linesNo);
+            //DA.SetDataList(2, membersNo);
+            //DA.SetDataList(3, srfcNo);
+            //DA.SetDataList(4, opNo);
+            //DA.SetDataList(5, nodSupNo);
+            //DA.SetDataList(6, lineSupNo);
+            //DA.SetDataList(7, lineHingeNo);
+            //DA.SetDataList(8, croSecNo);
+            //DA.SetDataList(9, matNo);
+            //DA.SetDataList(10, nodalLoadNo);
+            //DA.SetDataList(11, lineLoadNo);
+            //DA.SetDataList(12, memberLoadNo);
+            //DA.SetDataList(13, surfaceLoadNo);
+            //DA.SetDataList(14, polyLoadNo);
+            //DA.SetDataList(15, loadcaseNo);
+            //DA.SetDataList(16, loadcomboNo);
+            //DA.SetDataList(17, resultcomboNo);
 
-            if (errorMsg.Count != 0)
-            {
-                //errorMsg.Add("List item index may be one unit lower than object number");
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, String.Join(System.Environment.NewLine, errorMsg.ToArray()));
-            }
+            //if (errorMsg.Count != 0)
+            //{
+            //    //errorMsg.Add("List item index may be one unit lower than object number");
+            //    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, String.Join(System.Environment.NewLine, errorMsg.ToArray()));
+            //}
         }
 
         /// <summary>

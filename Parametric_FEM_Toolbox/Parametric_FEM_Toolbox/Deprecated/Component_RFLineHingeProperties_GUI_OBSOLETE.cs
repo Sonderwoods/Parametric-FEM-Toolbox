@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Rhino.Geometry;
 using Grasshopper.Kernel;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
 using System.Linq;
 
@@ -72,26 +72,26 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfLineHinge = (RFLineHinge)inGH.Value;
-            // Output
-            DA.SetData(0, rfLineHinge.BaseLine.ToCurve());
-            DA.SetData(1, rfLineHinge.No);
-            DA.SetData(2, rfLineHinge.LineNo);
-            DA.SetData(3, rfLineHinge.SfcNo);
-            DA.SetData(4, ((rfLineHinge.Tx < 0) ? rfLineHinge.Tx * 1000 : rfLineHinge.Tx));
-            DA.SetData(5, ((rfLineHinge.Ty < 0) ? rfLineHinge.Ty * 1000 : rfLineHinge.Ty));
-            DA.SetData(6, ((rfLineHinge.Tz < 0) ? rfLineHinge.Tz * 1000 : rfLineHinge.Tz));
-            DA.SetData(7, ((rfLineHinge.Rx < 0) ? rfLineHinge.Rx * 1000 : rfLineHinge.Rx));
-            DA.SetData(8, ((rfLineHinge.Ry < 0) ? rfLineHinge.Ry * 1000 : rfLineHinge.Ry));
-            DA.SetData(9, ((rfLineHinge.Rz < 0) ? rfLineHinge.Rz * 1000 : rfLineHinge.Rz));
-            DA.SetData(10, rfLineHinge.Comment);            
-            DA.SetData(11, rfLineHinge.Side);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfLineHinge = (RFLineHinge)inGH.Value;
+            //// Output
+            //DA.SetData(0, rfLineHinge.BaseLine.ToCurve());
+            //DA.SetData(1, rfLineHinge.No);
+            //DA.SetData(2, rfLineHinge.LineNo);
+            //DA.SetData(3, rfLineHinge.SfcNo);
+            //DA.SetData(4, ((rfLineHinge.Tx < 0) ? rfLineHinge.Tx * 1000 : rfLineHinge.Tx));
+            //DA.SetData(5, ((rfLineHinge.Ty < 0) ? rfLineHinge.Ty * 1000 : rfLineHinge.Ty));
+            //DA.SetData(6, ((rfLineHinge.Tz < 0) ? rfLineHinge.Tz * 1000 : rfLineHinge.Tz));
+            //DA.SetData(7, ((rfLineHinge.Rx < 0) ? rfLineHinge.Rx * 1000 : rfLineHinge.Rx));
+            //DA.SetData(8, ((rfLineHinge.Ry < 0) ? rfLineHinge.Ry * 1000 : rfLineHinge.Ry));
+            //DA.SetData(9, ((rfLineHinge.Rz < 0) ? rfLineHinge.Rz * 1000 : rfLineHinge.Rz));
+            //DA.SetData(10, rfLineHinge.Comment);            
+            //DA.SetData(11, rfLineHinge.Side);
         }
         
 

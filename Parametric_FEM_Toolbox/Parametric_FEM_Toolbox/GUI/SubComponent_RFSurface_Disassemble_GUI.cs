@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -59,23 +59,23 @@ namespace Parametric_FEM_Toolbox.GUI
             level = GH_RuntimeMessageLevel.Blank;
 
             // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfSurface = (RFSurface)inGH.Value;
-            // Output
-            DA.SetData(0, rfSurface.ToBrep());
-            DA.SetData(1, rfSurface.No);
-            DA.SetData(2, rfSurface.MaterialNo);
-            DA.SetData(3, rfSurface.Thickness);
-            DA.SetData(4, rfSurface.Comment);
-            DA.SetData(5, rfSurface.BoundaryLineList);
-            DA.SetData(6, rfSurface.GeometryType);
-            DA.SetData(7, rfSurface.ThicknessType);
-            DA.SetData(8, rfSurface.StiffnessType);
-            DA.SetData(9, rfSurface.Area);
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfSurface = (RFSurface)inGH.Value;
+            //// Output
+            //DA.SetData(0, rfSurface.ToBrep());
+            //DA.SetData(1, rfSurface.No);
+            //DA.SetData(2, rfSurface.MaterialNo);
+            //DA.SetData(3, rfSurface.Thickness);
+            //DA.SetData(4, rfSurface.Comment);
+            //DA.SetData(5, rfSurface.BoundaryLineList);
+            //DA.SetData(6, rfSurface.GeometryType);
+            //DA.SetData(7, rfSurface.ThicknessType);
+            //DA.SetData(8, rfSurface.StiffnessType);
+            //DA.SetData(9, rfSurface.Area);
 
         }
     }

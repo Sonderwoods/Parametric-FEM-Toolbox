@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -79,14 +79,17 @@ namespace Parametric_FEM_Toolbox.Deprecated
             mngr.RegisterUnit(evaluationUnit);
 
             evaluationUnit.RegisterInputParam(new Param_String(), "Boundary Line List", "Bound", "Boundary Line List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "Boundary Line List", "Bound", "Boundary Line List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "Boundary Line List", "Bound", "Boundary Line List", GH_ParamAccess.item);
+            evaluationUnit.RegisterInputParam(new Param_String(), "Boundary Line List", "Bound", "Boundary Line List", GH_ParamAccess.item);
             evaluationUnit.Inputs[0].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Surface Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceGeometryType)), GH_ParamAccess.item);
+            //evaluationUnit.RegisterInputParam(new Param_String(), "Surface Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceGeometryType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[1].Parameter.Optional = true;
             //evaluationUnit.RegisterInputParam(new Param_Integer(), "Interpolated Points", "n", "Number of interpolated points for NURBS", GH_ParamAccess.item, new GH_Integer(4));
             //evaluationUnit.Inputs[2].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Thickness Type", "Th Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceThicknessType)), GH_ParamAccess.item);
+           // evaluationUnit.RegisterInputParam(new Param_String(), "Thickness Type", "Th Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceThicknessType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[2].Parameter.Optional = true;
-            evaluationUnit.RegisterInputParam(new Param_String(), "Stiffness Type", "St Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceStiffnessType)), GH_ParamAccess.item);
+            //evaluationUnit.RegisterInputParam(new Param_String(), "Stiffness Type", "St Type", UtilLibrary.DescriptionRFTypes(typeof(SurfaceStiffnessType)), GH_ParamAccess.item);
             evaluationUnit.Inputs[3].Parameter.Optional = true;
 
             evaluationUnit.RegisterInputParam(new Param_RFEM(), "Surface", "Srfc", "Surface object from the RFEM model to modify", GH_ParamAccess.item);
@@ -122,88 +125,88 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Brep inSrfc = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfSrfc = new RFSurface();
-            var inRFEM = new GH_RFEM();
-            var rfEdges = new List<RFLine>();
-            var mod = false;
-            var del = false;
-            var boundList = "";
-            var geomType = "";
-            var stiffType = "";
-            var thickType = "";
-            var thick = 0.0;
-            var mat = 0;
-            //int intPoints = 4;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Brep inSrfc = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfSrfc = new RFSurface();
+            //var inRFEM = new GH_RFEM();
+            //var rfEdges = new List<RFLine>();
+            //var mod = false;
+            //var del = false;
+            //var boundList = "";
+            //var geomType = "";
+            //var stiffType = "";
+            //var thickType = "";
+            //var thick = 0.0;
+            //var mat = 0;
+            ////int intPoints = 4;
+            ////int newNo = 0;
 
-            if (DA.GetData(9, ref inRFEM))
-            {
-                rfSrfc = new RFSurface((RFSurface)inRFEM.Value);
-                if (DA.GetData(6, ref geomType))
-                {
-                    Enum.TryParse(geomType, out SurfaceGeometryType myGeomType);
-                    rfSrfc.GeometryType = myGeomType;
-                }
-            }
-            else if (DA.GetData(0, ref inSrfc))
-            {
-                if (!(DA.GetData(2, ref mat) && DA.GetData(3, ref thick)))
-                {
-                    return;
-                }
-                else
-                {
-                    rfSrfc.MaterialNo = mat;
-                    rfSrfc.Thickness = thick;
-                }
-                //DA.GetData(7, ref intPoints);
-                if (DA.GetData(6, ref geomType))
-                {
-                    Enum.TryParse(geomType, out SurfaceGeometryType myGeomType);
-                    rfSrfc.GeometryType = myGeomType;
-                }
-            Component_RFSurface.SetGeometry(inSrfc, ref rfSrfc);
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(10, ref mod))
-            {
-                rfSrfc.ToModify = mod;
-            }
-            if (DA.GetData(11, ref del))
-            {
-                rfSrfc.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfSrfc.No = noIndex;
-            }
-            if (DA.GetData(4, ref comment))
-            {
-                rfSrfc.Comment = comment;
-            }            
-            if (DA.GetData(5, ref boundList))
-            {
-                rfSrfc.BoundaryLineList = boundList;
-            }
-            if (DA.GetData(7, ref thickType))
-            {
-                Enum.TryParse(thickType, out SurfaceThicknessType myThicknessType);
-                rfSrfc.ThicknessType = myThicknessType;
-            }
-            if (DA.GetData(8, ref stiffType))
-            {
-                Enum.TryParse(stiffType, out SurfaceStiffnessType myStiffType);
-                rfSrfc.StiffnessType = myStiffType;
-            }
+            //if (DA.GetData(9, ref inRFEM))
+            //{
+            //    rfSrfc = new RFSurface((RFSurface)inRFEM.Value);
+            //    if (DA.GetData(6, ref geomType))
+            //    {
+            //        Enum.TryParse(geomType, out SurfaceGeometryType myGeomType);
+            //        rfSrfc.GeometryType = myGeomType;
+            //    }
+            //}
+            //else if (DA.GetData(0, ref inSrfc))
+            //{
+            //    if (!(DA.GetData(2, ref mat) && DA.GetData(3, ref thick)))
+            //    {
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        rfSrfc.MaterialNo = mat;
+            //        rfSrfc.Thickness = thick;
+            //    }
+            //    //DA.GetData(7, ref intPoints);
+            //    if (DA.GetData(6, ref geomType))
+            //    {
+            //        Enum.TryParse(geomType, out SurfaceGeometryType myGeomType);
+            //        rfSrfc.GeometryType = myGeomType;
+            //    }
+            //Component_RFSurface.SetGeometry(inSrfc, ref rfSrfc);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(10, ref mod))
+            //{
+            //    rfSrfc.ToModify = mod;
+            //}
+            //if (DA.GetData(11, ref del))
+            //{
+            //    rfSrfc.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfSrfc.No = noIndex;
+            //}
+            //if (DA.GetData(4, ref comment))
+            //{
+            //    rfSrfc.Comment = comment;
+            //}            
+            //if (DA.GetData(5, ref boundList))
+            //{
+            //    rfSrfc.BoundaryLineList = boundList;
+            //}
+            //if (DA.GetData(7, ref thickType))
+            //{
+            //    Enum.TryParse(thickType, out SurfaceThicknessType myThicknessType);
+            //    rfSrfc.ThicknessType = myThicknessType;
+            //}
+            //if (DA.GetData(8, ref stiffType))
+            //{
+            //    Enum.TryParse(stiffType, out SurfaceStiffnessType myStiffType);
+            //    rfSrfc.StiffnessType = myStiffType;
+            //}
             
-            DA.SetData(0, rfSrfc);
+            //DA.SetData(0, rfSrfc);
         }
                  
         /// <summary>

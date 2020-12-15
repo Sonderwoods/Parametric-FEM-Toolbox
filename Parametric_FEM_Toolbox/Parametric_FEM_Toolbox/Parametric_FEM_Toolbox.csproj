@@ -154,6 +154,7 @@
     <Compile Include="GUI\Component_GetData_GUI.cs" />
     <Compile Include="Deprecated\Component_RFNode_GUI_OBSOLETE.cs" />
     <Compile Include="Deprecated\SubComponent_Filter_Members_GUI_OBSOLETE.cs" />
+    <Compile Include="GUI\GH_RFEM.cs" />
     <Compile Include="GUI\SubComponent_Filter_ResultCombos_GUI.cs" />
     <Compile Include="GUI\SubComponent_Filter_LoadCombos_GUI.cs" />
     <Compile Include="GUI\SubComponent_Filter_LoadCases_GUI.cs" />
@@ -216,20 +217,6 @@
     <Compile Include="HelperLibraries\Component_RFLine.cs" />
     <Compile Include="HelperLibraries\Component_SetData.cs" />
     <Compile Include="HelperLibraries\Component_GetData.cs" />
-    <Compile Include="RFEM\RFResultCombo.cs" />
-    <Compile Include="RFEM\RFLoadCombo.cs" />
-    <Compile Include="RFEM\RFLoadCase.cs" />
-    <Compile Include="RFEM\RFFreePolygonLoad.cs" />
-    <Compile Include="RFEM\RFSupportS.cs" />
-    <Compile Include="RFEM\RFSurfaceLoad.cs" />
-    <Compile Include="RFEM\RFMemberLoad.cs" />
-    <Compile Include="RFEM\RFMaterial.cs" />
-    <Compile Include="RFEM\RFLineHinge.cs" />
-    <Compile Include="RFEM\RFCroSec.cs" />
-    <Compile Include="RFEM\RFLineLoad.cs" />
-    <Compile Include="RFEM\RFSupportL.cs" />
-    <Compile Include="RFEM\RFNodalLoad.cs" />
-    <Compile Include="RFEM\RFSupportP.cs" />
     <Compile Include="Parametric_FEM_Toolbox.cs" />
     <Compile Include="GUI\Param_Filter.cs" />
     <Compile Include="GUI\SubComponent_Filter_Lines_GUI.cs" />
@@ -244,12 +231,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RFEM\RFOpening.cs" />
-    <Compile Include="RFEM\RFSurface.cs" />
-    <Compile Include="RFEM\RFMember.cs" />
-    <Compile Include="RFEM\RFLine.cs" />
-    <Compile Include="RFEM\RFNode.cs" />
-    <Compile Include="RFEM\IGrassRFEM.cs" />
     <Compile Include="UIWidgets\EvaluationUnitManager.cs" />
     <Compile Include="UIWidgets\GH_ExtendableComponent.cs" />
     <Compile Include="UIWidgets\GH_ExtendableComponentAttributes.cs" />
@@ -272,7 +253,6 @@
     <Compile Include="UIWidgets\WidgetRenderArgs.cs" />
     <Compile Include="UIWidgets\WidgetServer.cs" />
     <Compile Include="Utilities\ActiveTypeBinder.cs" />
-    <Compile Include="RFEM\GH_RFEM.cs" />
     <Compile Include="GUI\Param_RFEM.cs" />
     <Compile Include="Utilities\GH_RFFilter.cs" />
     <Compile Include="Utilities\RFFilter.cs" />

@@ -8,7 +8,7 @@ using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.GUI;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 
 namespace Parametric_FEM_Toolbox.Deprecated
 {
@@ -111,57 +111,57 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            Brep inSrfc = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfOpening = new RFOpening();
-            var inRFEM = new GH_RFEM();
-            var rfEdges = new List<RFLine>();
-            var mod = false;
-            var del = false;
-            var boundList = "";
-            var inSrfcNo = 0;
-            int intPoints = 4;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Brep inSrfc = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfOpening = new RFOpening();
+            //var inRFEM = new GH_RFEM();
+            //var rfEdges = new List<RFLine>();
+            //var mod = false;
+            //var del = false;
+            //var boundList = "";
+            //var inSrfcNo = 0;
+            //int intPoints = 4;
+            ////int newNo = 0;
 
-            if (DA.GetData(6, ref inRFEM))
-            {
-                rfOpening = new RFOpening((RFOpening)inRFEM.Value);
-            }else if (DA.GetData(0, ref inSrfc))
-            {
-                DA.GetData(5, ref intPoints);
-                Component_RFOpening.SetGeometry(inSrfc, intPoints, ref rfOpening);                
-            }else
-            {
-                return;
-            }
-            if (DA.GetData(7, ref mod))
-            {
-                rfOpening.ToModify = mod;
-            }
-            if (DA.GetData(8, ref del))
-            {
-                rfOpening.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfOpening.No = noIndex;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rfOpening.Comment = comment;
-            }
-            if (DA.GetData(2, ref inSrfcNo))
-            {
-                rfOpening.InSurfaceNo = inSrfcNo;
-            }
-            if (DA.GetData(4, ref boundList))
-            {
-                rfOpening.BoundaryLineList = boundList;
-            }
+            //if (DA.GetData(6, ref inRFEM))
+            //{
+            //    rfOpening = new RFOpening((RFOpening)inRFEM.Value);
+            //}else if (DA.GetData(0, ref inSrfc))
+            //{
+            //    DA.GetData(5, ref intPoints);
+            //    Component_RFOpening.SetGeometry(inSrfc, intPoints, ref rfOpening);                
+            //}else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(7, ref mod))
+            //{
+            //    rfOpening.ToModify = mod;
+            //}
+            //if (DA.GetData(8, ref del))
+            //{
+            //    rfOpening.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfOpening.No = noIndex;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rfOpening.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref inSrfcNo))
+            //{
+            //    rfOpening.InSurfaceNo = inSrfcNo;
+            //}
+            //if (DA.GetData(4, ref boundList))
+            //{
+            //    rfOpening.BoundaryLineList = boundList;
+            //}
             
-            DA.SetData(0, rfOpening);
+            //DA.SetData(0, rfOpening);
         }
 
       

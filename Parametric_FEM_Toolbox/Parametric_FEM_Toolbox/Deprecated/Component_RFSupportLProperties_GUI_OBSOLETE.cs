@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Rhino.Geometry;
 using Grasshopper.Kernel;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
 using System.Linq;
 
@@ -71,25 +71,25 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfSupport = (RFSupportL)inGH.Value;
-            // Output
-            DA.SetDataList(0, rfSupport.BaseLines.Select(x => x.ToCurve()));
-            DA.SetData(1, rfSupport.No);
-            DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
-            DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
-            DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
-            DA.SetData(5, ((rfSupport.Rx < 0) ? rfSupport.Rx * 1000 : rfSupport.Rx));
-            DA.SetData(6, ((rfSupport.Ry < 0) ? rfSupport.Ry * 1000 : rfSupport.Ry));
-            DA.SetData(7, ((rfSupport.Rz < 0) ? rfSupport.Rz * 1000 : rfSupport.Rz));
-            DA.SetData(8, rfSupport.Comment);
-            DA.SetData(9, rfSupport.LineList);
-            DA.SetData(10, rfSupport.RSType);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfSupport = (RFSupportL)inGH.Value;
+            //// Output
+            //DA.SetDataList(0, rfSupport.BaseLines.Select(x => x.ToCurve()));
+            //DA.SetData(1, rfSupport.No);
+            //DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
+            //DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
+            //DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
+            //DA.SetData(5, ((rfSupport.Rx < 0) ? rfSupport.Rx * 1000 : rfSupport.Rx));
+            //DA.SetData(6, ((rfSupport.Ry < 0) ? rfSupport.Ry * 1000 : rfSupport.Ry));
+            //DA.SetData(7, ((rfSupport.Rz < 0) ? rfSupport.Rz * 1000 : rfSupport.Rz));
+            //DA.SetData(8, rfSupport.Comment);
+            //DA.SetData(9, rfSupport.LineList);
+            //DA.SetData(10, rfSupport.RSType);
         }
         
 

@@ -8,8 +8,8 @@ using System.Linq;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -57,26 +57,26 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfSupport = (RFSupportS)inGH.Value;
-            // Output
-            if (!(rfSupport.BaseSrfcs == null))
-            {
-                DA.SetDataList(0, rfSupport.BaseSrfcs.Select(x => x.ToBrep()));
-            }
-            DA.SetData(1, rfSupport.No);
-            DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
-            DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
-            DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
-            DA.SetData(5, ((rfSupport.Vxz < 0) ? rfSupport.Vxz * 1000 : rfSupport.Vxz));
-            DA.SetData(6, ((rfSupport.Vyz < 0) ? rfSupport.Vyz * 1000 : rfSupport.Vyz));
-            DA.SetData(7, rfSupport.Comment);
-            DA.SetData(8, rfSupport.SurfaceList);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfSupport = (RFSupportS)inGH.Value;
+            //// Output
+            //if (!(rfSupport.BaseSrfcs == null))
+            //{
+            //    DA.SetDataList(0, rfSupport.BaseSrfcs.Select(x => x.ToBrep()));
+            //}
+            //DA.SetData(1, rfSupport.No);
+            //DA.SetData(2, ((rfSupport.Tx < 0) ? rfSupport.Tx * 1000 : rfSupport.Tx));
+            //DA.SetData(3, ((rfSupport.Ty < 0) ? rfSupport.Ty * 1000 : rfSupport.Ty));
+            //DA.SetData(4, ((rfSupport.Tz < 0) ? rfSupport.Tz * 1000 : rfSupport.Tz));
+            //DA.SetData(5, ((rfSupport.Vxz < 0) ? rfSupport.Vxz * 1000 : rfSupport.Vxz));
+            //DA.SetData(6, ((rfSupport.Vyz < 0) ? rfSupport.Vyz * 1000 : rfSupport.Vyz));
+            //DA.SetData(7, rfSupport.Comment);
+            //DA.SetData(8, rfSupport.SurfaceList);
 
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Rhino.Geometry;
 using Grasshopper.Kernel;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.HelperLibraries;
 using Parametric_FEM_Toolbox.GUI;
 
@@ -68,22 +68,22 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfNodalLoad = (RFNodalLoad)inGH.Value;
-            // Output
-            DA.SetDataList(0, rfNodalLoad.Location);
-            DA.SetData(1, rfNodalLoad.No);
-            DA.SetData(2, rfNodalLoad.LoadCase);
-            DA.SetData(3, rfNodalLoad.Force);
-            DA.SetData(4, rfNodalLoad.Moment);
-            DA.SetData(5, rfNodalLoad.Comment);
-            DA.SetData(6, rfNodalLoad.NodeList);
-            DA.SetData(7, rfNodalLoad.LoadDefType);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfNodalLoad = (RFNodalLoad)inGH.Value;
+            //// Output
+            //DA.SetDataList(0, rfNodalLoad.Location);
+            //DA.SetData(1, rfNodalLoad.No);
+            //DA.SetData(2, rfNodalLoad.LoadCase);
+            //DA.SetData(3, rfNodalLoad.Force);
+            //DA.SetData(4, rfNodalLoad.Moment);
+            //DA.SetData(5, rfNodalLoad.Comment);
+            //DA.SetData(6, rfNodalLoad.NodeList);
+            //DA.SetData(7, rfNodalLoad.LoadDefType);
 
         }
         

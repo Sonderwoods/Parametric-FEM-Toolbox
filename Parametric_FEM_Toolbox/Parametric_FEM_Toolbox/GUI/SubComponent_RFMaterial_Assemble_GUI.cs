@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -87,81 +87,81 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
-            //var line = new LineCurve();
-            var noIndex = 0;
-            var comment = "";
-            var description = "";
-            var rfMaterial = new RFMaterial();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var E = 0.0;
-            var W = 0.0;
-            var Alpha = 0.0;
-            var Mu = 0.0;
-            var G = 0.0;
-            var Gamma = 0.0;
+            ////var line = new LineCurve();
+            //var noIndex = 0;
+            //var comment = "";
+            //var description = "";
+            //var rfMaterial = new RFMaterial();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var E = 0.0;
+            //var W = 0.0;
+            //var Alpha = 0.0;
+            //var Mu = 0.0;
+            //var G = 0.0;
+            //var Gamma = 0.0;
 
 
-            if (DA.GetData(9, ref inRFEM))
-            {
-                rfMaterial = new RFMaterial((RFMaterial)inRFEM.Value);
-                if (DA.GetData(0, ref description))
-                {
-                    rfMaterial.Description = description;
-                }
-            }
-            else if (DA.GetData(0, ref description))
-            {
-                rfMaterial.Description = description;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Material Description or existing RFMaterial Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(10, ref mod))
-            {
-                rfMaterial.ToModify = mod;
-            }
-            if (DA.GetData(11, ref del))
-            {
-                rfMaterial.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfMaterial.No = noIndex;
-            }
-            if (DA.GetData(2, ref comment))
-            {
-                rfMaterial.Comment = comment;
-            }
-            if (DA.GetData(3, ref E))
-            {
-                rfMaterial.E = E;
-            }
-            if (DA.GetData(4, ref Mu))
-            {
-                rfMaterial.Mu = Mu;
-            }
-            if (DA.GetData(5, ref G))
-            {
-                rfMaterial.G = G;
-            }
-            if (DA.GetData(6, ref W))
-            {
-                rfMaterial.W = W;
-            }
-            if (DA.GetData(7, ref Alpha))
-            {
-                rfMaterial.Alpha = Alpha;
-            }
-            if (DA.GetData(8, ref Gamma))
-            {
-                rfMaterial.Gamma = Gamma;
-            }
-            DA.SetData(0, rfMaterial);
+            //if (DA.GetData(9, ref inRFEM))
+            //{
+            //    rfMaterial = new RFMaterial((RFMaterial)inRFEM.Value);
+            //    if (DA.GetData(0, ref description))
+            //    {
+            //        rfMaterial.Description = description;
+            //    }
+            //}
+            //else if (DA.GetData(0, ref description))
+            //{
+            //    rfMaterial.Description = description;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Material Description or existing RFMaterial Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(10, ref mod))
+            //{
+            //    rfMaterial.ToModify = mod;
+            //}
+            //if (DA.GetData(11, ref del))
+            //{
+            //    rfMaterial.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfMaterial.No = noIndex;
+            //}
+            //if (DA.GetData(2, ref comment))
+            //{
+            //    rfMaterial.Comment = comment;
+            //}
+            //if (DA.GetData(3, ref E))
+            //{
+            //    rfMaterial.E = E;
+            //}
+            //if (DA.GetData(4, ref Mu))
+            //{
+            //    rfMaterial.Mu = Mu;
+            //}
+            //if (DA.GetData(5, ref G))
+            //{
+            //    rfMaterial.G = G;
+            //}
+            //if (DA.GetData(6, ref W))
+            //{
+            //    rfMaterial.W = W;
+            //}
+            //if (DA.GetData(7, ref Alpha))
+            //{
+            //    rfMaterial.Alpha = Alpha;
+            //}
+            //if (DA.GetData(8, ref Gamma))
+            //{
+            //    rfMaterial.Gamma = Gamma;
+            //}
+            //DA.SetData(0, rfMaterial);
         }
     }
 }

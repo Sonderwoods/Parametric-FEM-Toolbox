@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -129,99 +129,99 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA, EvaluationUnit unit)
         {
-            //var line = new LineCurve();
-            var noIndex = 0;
-            var comment = "";
-            var description = "";
-            var rFCroSec = new RFCroSec();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var rotAngle = 0.0;
-            var matNo = 0;
-            var A = 0.0;
-            var Ay = 0.0;
-            var Az = 0.0;
-            var Iy = 0.0;
-            var Iz = 0.0;
-            var Jt = 0.0;
-            var TempW = 0.0;
-            var TempD = 0.0;
+            ////var line = new LineCurve();
+            //var noIndex = 0;
+            //var comment = "";
+            //var description = "";
+            //var rFCroSec = new RFCroSec();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var rotAngle = 0.0;
+            //var matNo = 0;
+            //var A = 0.0;
+            //var Ay = 0.0;
+            //var Az = 0.0;
+            //var Iy = 0.0;
+            //var Iz = 0.0;
+            //var Jt = 0.0;
+            //var TempW = 0.0;
+            //var TempD = 0.0;
 
-            if (DA.GetData(13, ref inRFEM))
-            {
-                rFCroSec = new RFCroSec((RFCroSec)inRFEM.Value);
-                if (DA.GetData(0, ref description))
-                {
-                    rFCroSec.Description = description;
-                }
-                if (DA.GetData(1, ref matNo))
-                {
-                    rFCroSec.MatNo = matNo;
-                }
-            }
-            else if (DA.GetData(0, ref description) && DA.GetData(1, ref matNo))
-            {
-                rFCroSec.Description = description;
-                rFCroSec.MatNo = matNo;
-            }
-            else
-            {
-                return;
-            }
-            if (DA.GetData(14, ref mod))
-            {
-                rFCroSec.ToModify = mod;
-            }
-            if (DA.GetData(15, ref del))
-            {
-                rFCroSec.ToDelete = del;
-            }
-            if (DA.GetData(2, ref noIndex))
-            {
-                rFCroSec.No = noIndex;
-            }
-            if (DA.GetData(3, ref comment))
-            {
-                rFCroSec.Comment = comment;
-            }
-            if (DA.GetData(4, ref A))
-            {
-                rFCroSec.A = A;
-            }
-            if (DA.GetData(5, ref Ay))
-            {
-                rFCroSec.Ay = Ay;
-            }
-            if (DA.GetData(6, ref Az))
-            {
-                rFCroSec.Az = Az;
-            }
-            if (DA.GetData(7, ref Iy))
-            {
-                rFCroSec.Iy = Iy;
-            }
-            if (DA.GetData(8, ref Iz))
-            {
-                rFCroSec.Iz = Iz;
-            }
-            if (DA.GetData(9, ref Jt))
-            {
-                rFCroSec.Jt = Jt;
-            }
-            if (DA.GetData(10, ref rotAngle))
-            {
-                rFCroSec.RotationAngle = rotAngle;
-            }
-            if (DA.GetData(11, ref TempW))
-            {
-                rFCroSec.TempWidth = TempW;
-            }
-            if (DA.GetData(12, ref TempD))
-            {
-                rFCroSec.TempDepth = TempD;
-            }
-            DA.SetData(0, rFCroSec);
+            //if (DA.GetData(13, ref inRFEM))
+            //{
+            //    rFCroSec = new RFCroSec((RFCroSec)inRFEM.Value);
+            //    if (DA.GetData(0, ref description))
+            //    {
+            //        rFCroSec.Description = description;
+            //    }
+            //    if (DA.GetData(1, ref matNo))
+            //    {
+            //        rFCroSec.MatNo = matNo;
+            //    }
+            //}
+            //else if (DA.GetData(0, ref description) && DA.GetData(1, ref matNo))
+            //{
+            //    rFCroSec.Description = description;
+            //    rFCroSec.MatNo = matNo;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+            //if (DA.GetData(14, ref mod))
+            //{
+            //    rFCroSec.ToModify = mod;
+            //}
+            //if (DA.GetData(15, ref del))
+            //{
+            //    rFCroSec.ToDelete = del;
+            //}
+            //if (DA.GetData(2, ref noIndex))
+            //{
+            //    rFCroSec.No = noIndex;
+            //}
+            //if (DA.GetData(3, ref comment))
+            //{
+            //    rFCroSec.Comment = comment;
+            //}
+            //if (DA.GetData(4, ref A))
+            //{
+            //    rFCroSec.A = A;
+            //}
+            //if (DA.GetData(5, ref Ay))
+            //{
+            //    rFCroSec.Ay = Ay;
+            //}
+            //if (DA.GetData(6, ref Az))
+            //{
+            //    rFCroSec.Az = Az;
+            //}
+            //if (DA.GetData(7, ref Iy))
+            //{
+            //    rFCroSec.Iy = Iy;
+            //}
+            //if (DA.GetData(8, ref Iz))
+            //{
+            //    rFCroSec.Iz = Iz;
+            //}
+            //if (DA.GetData(9, ref Jt))
+            //{
+            //    rFCroSec.Jt = Jt;
+            //}
+            //if (DA.GetData(10, ref rotAngle))
+            //{
+            //    rFCroSec.RotationAngle = rotAngle;
+            //}
+            //if (DA.GetData(11, ref TempW))
+            //{
+            //    rFCroSec.TempWidth = TempW;
+            //}
+            //if (DA.GetData(12, ref TempD))
+            //{
+            //    rFCroSec.TempDepth = TempD;
+            //}
+            //DA.SetData(0, rFCroSec);
         }
 
         // Additonal functions

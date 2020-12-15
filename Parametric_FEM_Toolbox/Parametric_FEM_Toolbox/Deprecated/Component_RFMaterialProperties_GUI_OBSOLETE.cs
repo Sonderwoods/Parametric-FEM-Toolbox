@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grasshopper.Kernel;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.GUI;
 
 namespace Parametric_FEM_Toolbox.Deprecated
@@ -69,26 +69,26 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfMat = (RFMaterial)inGH.Value;
-            // Output
-            DA.SetData(0, rfMat.Description);
-            DA.SetData(1, rfMat.No);
-            DA.SetData(2, rfMat.Comment);
-            DA.SetData(3, rfMat.E);
-            DA.SetData(4, rfMat.Mu);
-            DA.SetData(5, rfMat.G);
-            DA.SetData(6, rfMat.W);
-            DA.SetData(7, rfMat.Alpha);
-            DA.SetData(8, rfMat.Gamma);
-            DA.SetData(9, rfMat.ModelType);
-            DA.SetData(10, rfMat.TextID);
-            DA.SetData(11, rfMat.UserDefined);
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfMat = (RFMaterial)inGH.Value;
+            //// Output
+            //DA.SetData(0, rfMat.Description);
+            //DA.SetData(1, rfMat.No);
+            //DA.SetData(2, rfMat.Comment);
+            //DA.SetData(3, rfMat.E);
+            //DA.SetData(4, rfMat.Mu);
+            //DA.SetData(5, rfMat.G);
+            //DA.SetData(6, rfMat.W);
+            //DA.SetData(7, rfMat.Alpha);
+            //DA.SetData(8, rfMat.Gamma);
+            //DA.SetData(9, rfMat.ModelType);
+            //DA.SetData(10, rfMat.TextID);
+            //DA.SetData(11, rfMat.UserDefined);
         }
 
         /// <summary>

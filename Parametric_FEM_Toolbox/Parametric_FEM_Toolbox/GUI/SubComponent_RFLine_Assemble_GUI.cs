@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -48,9 +48,9 @@ namespace Parametric_FEM_Toolbox.GUI
             gH_ExtendableMenu.Name = "Advanced";
             gH_ExtendableMenu.Collapse();
             unit.RegisterInputParam(new Param_String(), "NodeList", "NodeList", "Node List", GH_ParamAccess.item);
+            unit.RegisterInputParam(new Param_String(), "NodeList", "NodeList", "Node List", GH_ParamAccess.item);
             unit.Inputs[3].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Line Type", "Type", UtilLibrary.DescriptionRFTypes(typeof(LineType)), GH_ParamAccess.item);
-            unit.Inputs[4].EnumInput = UtilLibrary.ListRFTypes(typeof(LineType));
+         
             unit.Inputs[4].Parameter.Optional = true;            
             unit.RegisterInputParam(new Param_Number(), "Rotation Angle [°]", "β", "Rotation Angle [°]", GH_ParamAccess.item);
             unit.Inputs[5].Parameter.Optional = true;
@@ -80,71 +80,71 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rFLine = new RFLine();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var nodeList = "";
-            var lineType = 0;
-            var rotAngle = 0.0;
-            //int intPoints = 4;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rFLine = new RFLine();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var nodeList = "";
+            //var lineType = 0;
+            //var rotAngle = 0.0;
+            ////int intPoints = 4;
+            ////int newNo = 0;
 
-            if (DA.GetData(6, ref inRFEM))
-            {
-                rFLine = new RFLine((RFLine)inRFEM.Value);
-            }
-            else if (DA.GetData(0, ref inCurve))
-            {
-                Component_RFLine.SetGeometry(inCurve, ref rFLine);
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Input Curve or existing RFLine Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(7, ref mod))
-            {
-                rFLine.ToModify = mod;
-            }
-            if (DA.GetData(8, ref del))
-            {
-                rFLine.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rFLine.No = noIndex;
-            }
-            if (DA.GetData(2, ref comment))
-            {
-                rFLine.Comment = comment;
-            }
-            if (DA.GetData(3, ref nodeList))
-            {
-                rFLine.NodeList = nodeList;
-            }
-            if (DA.GetData(4, ref lineType))
-            {
-                rFLine.Type = (LineType)lineType;
-                if (rFLine.Type == LineType.UnknownLineType)
-                {
-                    msg = "Line Type not supported. ";
-                    level = GH_RuntimeMessageLevel.Warning;
-                    return;
-                }
-            }
-            if (DA.GetData(5, ref rotAngle))
-            {
-                rFLine.RotationType = RotationType.Angle;
-                rFLine.RotationAngle = rotAngle;
-            }
+            //if (DA.GetData(6, ref inRFEM))
+            //{
+            //    rFLine = new RFLine((RFLine)inRFEM.Value);
+            //}
+            //else if (DA.GetData(0, ref inCurve))
+            //{
+            //    Component_RFLine.SetGeometry(inCurve, ref rFLine);
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Input Curve or existing RFLine Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(7, ref mod))
+            //{
+            //    rFLine.ToModify = mod;
+            //}
+            //if (DA.GetData(8, ref del))
+            //{
+            //    rFLine.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rFLine.No = noIndex;
+            //}
+            //if (DA.GetData(2, ref comment))
+            //{
+            //    rFLine.Comment = comment;
+            //}
+            //if (DA.GetData(3, ref nodeList))
+            //{
+            //    rFLine.NodeList = nodeList;
+            //}
+            //if (DA.GetData(4, ref lineType))
+            //{
+            //    rFLine.Type = (LineType)lineType;
+            //    if (rFLine.Type == LineType.UnknownLineType)
+            //    {
+            //        msg = "Line Type not supported. ";
+            //        level = GH_RuntimeMessageLevel.Warning;
+            //        return;
+            //    }
+            //}
+            //if (DA.GetData(5, ref rotAngle))
+            //{
+            //    rFLine.RotationType = RotationType.Angle;
+            //    rFLine.RotationAngle = rotAngle;
+            //}
 
-            DA.SetData(0, rFLine);
+            //DA.SetData(0, rFLine);
         }
     }
 }

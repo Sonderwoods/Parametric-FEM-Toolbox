@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -60,9 +60,10 @@ namespace Parametric_FEM_Toolbox.GUI
             gH_ExtendableMenu.Name = "Advanced";
             gH_ExtendableMenu.Collapse();
             unit.RegisterInputParam(new Param_String(), "Line List", "LineList", "Line List", GH_ParamAccess.item);
+            unit.RegisterInputParam(new Param_String(), "Line List", "LineList", "Line List", GH_ParamAccess.item);
             unit.Inputs[9].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Reference System Type", "RefSys", UtilLibrary.DescriptionRFTypes(typeof(ReferenceSystemType)), GH_ParamAccess.item);
-            unit.Inputs[10].EnumInput = UtilLibrary.ListRFTypes(typeof(ReferenceSystemType));
+            //unit.RegisterInputParam(new Param_Integer(), "Reference System Type", "RefSys", UtilLibrary.DescriptionRFTypes(typeof(ReferenceSystemType)), GH_ParamAccess.item);
+            //unit.Inputs[10].EnumInput = UtilLibrary.ListRFTypes(typeof(ReferenceSystemType));
             unit.Inputs[10].Parameter.Optional = true;
             gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[9]);
             gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[10]);
@@ -90,108 +91,108 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfSup = new RFSupportL();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var rx = 0.0;
-            var ry = 0.0;
-            var rz = 0.0;
-            var lineList = "";
-            var refSys = 0;
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfSup = new RFSupportL();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var rx = 0.0;
+            //var ry = 0.0;
+            //var rz = 0.0;
+            //var lineList = "";
+            //var refSys = 0;
 
 
-            if (DA.GetData(11, ref inRFEM))
-            {
-                rfSup = new RFSupportL((RFSupportL)inRFEM.Value);
-                if (DA.GetData(0, ref inCurve))
-                {
-                    var myRFLine = new RFLine();
-                    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                    var myRFLines = new List<RFLine>() { myRFLine };
-                    rfSup = new RFSupportL(rfSup, myRFLines);
-                }
-            }
-            else if (DA.GetData(0, ref inCurve))
-            {
-                var myRFLine = new RFLine();
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                var myRFLines = new List<RFLine>() { myRFLine };
-                rfSup = new RFSupportL(new LineSupport(), myRFLines);
-            }
-            else if (DA.GetData(9, ref lineList))
-            {
-                rfSup = new RFSupportL();
-                rfSup.LineList = lineList;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Input Curve or Line List or existing RFSupportL Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(12, ref mod))
-            {
-                rfSup.ToModify = mod;
-            }
-            if (DA.GetData(13, ref del))
-            {
-                rfSup.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfSup.No = noIndex;
-            }
-            if (DA.GetData(8, ref comment))
-            {
-                rfSup.Comment = comment;
-            }
-            if (DA.GetData(2, ref tx))
-            {
-                rfSup.Tx = tx;
-            }
-            if (DA.GetData(3, ref ty))
-            {
-                rfSup.Ty = ty;
-            }
-            if (DA.GetData(4, ref tz))
-            {
-                rfSup.Tz = tz;
-            }
-            if (DA.GetData(5, ref rx))
-            {
-                rfSup.Rx = rx;
-            }
-            if (DA.GetData(6, ref ry))
-            {
-                rfSup.Ry = ry;
-            }
-            if (DA.GetData(7, ref rz))
-            {
-                rfSup.Rz = rz;
-            }
-            if (DA.GetData(9, ref lineList))
-            {
-                rfSup.LineList = lineList;
-            }
-            if (DA.GetData(10, ref refSys))
-            {
-                rfSup.RSType = (ReferenceSystemType)refSys;
-                if (rfSup.RSType == ReferenceSystemType.UnknownReferenceSystemType)
-                {
-                    msg = "Reference System Type not supported. ";
-                    level = GH_RuntimeMessageLevel.Warning;
-                    return;
-                }
-            }
+            //if (DA.GetData(11, ref inRFEM))
+            //{
+            //    rfSup = new RFSupportL((RFSupportL)inRFEM.Value);
+            //    if (DA.GetData(0, ref inCurve))
+            //    {
+            //        var myRFLine = new RFLine();
+            //        Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //        var myRFLines = new List<RFLine>() { myRFLine };
+            //        rfSup = new RFSupportL(rfSup, myRFLines);
+            //    }
+            //}
+            //else if (DA.GetData(0, ref inCurve))
+            //{
+            //    var myRFLine = new RFLine();
+            //    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //    var myRFLines = new List<RFLine>() { myRFLine };
+            //    rfSup = new RFSupportL(new LineSupport(), myRFLines);
+            //}
+            //else if (DA.GetData(9, ref lineList))
+            //{
+            //    rfSup = new RFSupportL();
+            //    rfSup.LineList = lineList;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Input Curve or Line List or existing RFSupportL Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(12, ref mod))
+            //{
+            //    rfSup.ToModify = mod;
+            //}
+            //if (DA.GetData(13, ref del))
+            //{
+            //    rfSup.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfSup.No = noIndex;
+            //}
+            //if (DA.GetData(8, ref comment))
+            //{
+            //    rfSup.Comment = comment;
+            //}
+            //if (DA.GetData(2, ref tx))
+            //{
+            //    rfSup.Tx = tx;
+            //}
+            //if (DA.GetData(3, ref ty))
+            //{
+            //    rfSup.Ty = ty;
+            //}
+            //if (DA.GetData(4, ref tz))
+            //{
+            //    rfSup.Tz = tz;
+            //}
+            //if (DA.GetData(5, ref rx))
+            //{
+            //    rfSup.Rx = rx;
+            //}
+            //if (DA.GetData(6, ref ry))
+            //{
+            //    rfSup.Ry = ry;
+            //}
+            //if (DA.GetData(7, ref rz))
+            //{
+            //    rfSup.Rz = rz;
+            //}
+            //if (DA.GetData(9, ref lineList))
+            //{
+            //    rfSup.LineList = lineList;
+            //}
+            //if (DA.GetData(10, ref refSys))
+            //{
+            //    rfSup.RSType = (ReferenceSystemType)refSys;
+            //    if (rfSup.RSType == ReferenceSystemType.UnknownReferenceSystemType)
+            //    {
+            //        msg = "Reference System Type not supported. ";
+            //        level = GH_RuntimeMessageLevel.Warning;
+            //        return;
+            //    }
+            //}
 
-            DA.SetData(0, rfSup);
+            //DA.SetData(0, rfSup);
         }
     }
 }

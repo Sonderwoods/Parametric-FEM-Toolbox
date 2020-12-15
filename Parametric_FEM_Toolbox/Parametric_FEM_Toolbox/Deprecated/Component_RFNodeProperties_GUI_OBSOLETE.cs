@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Parametric_FEM_Toolbox.GUI;
-using Parametric_FEM_Toolbox.RFEM;
+
 
 namespace Parametric_FEM_Toolbox.Deprecated
 {
@@ -62,19 +62,19 @@ namespace Parametric_FEM_Toolbox.Deprecated
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Input
-            var inGH = new GH_RFEM();            
-            if(!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rFNode = (RFNode)inGH.Value;
-            // Output
-            DA.SetData(0, rFNode.Location);
-            DA.SetData(1, rFNode.No);
-            DA.SetData(2, rFNode.Comment);
-            DA.SetData(3, rFNode.CS);
-            DA.SetData(4, rFNode.RefObjectNo);
+            //// Input
+            //var inGH = new GH_RFEM();            
+            //if(!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rFNode = (RFNode)inGH.Value;
+            //// Output
+            //DA.SetData(0, rFNode.Location);
+            //DA.SetData(1, rFNode.No);
+            //DA.SetData(2, rFNode.Comment);
+            //DA.SetData(3, rFNode.CS);
+            //DA.SetData(4, rFNode.RefObjectNo);
         }
 
         /// <summary>

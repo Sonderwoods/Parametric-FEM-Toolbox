@@ -9,9 +9,9 @@ using Rhino.Geometry;
 using Parametric_FEM_Toolbox.UIWidgets;
 
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Parametric_FEM_Toolbox.RFEM;
+
 using Parametric_FEM_Toolbox.Utilities;
-using Dlubal.RFEM5;
+
 using System.Runtime.InteropServices;
 using Grasshopper;
 using Grasshopper.Kernel.Data;
@@ -21,14 +21,14 @@ namespace Parametric_FEM_Toolbox.GUI
     public class Component_GetResults_GUI : GH_SwitcherComponent
     {
         // Declare class variables outside the method "SolveInstance" so their values persist 
-        // when the method is called again.
-        List<RFNode> rfNodes = new List<RFNode>(); // Calculation results
-        DataTree<Mesh> _feMeshes = new DataTree<Mesh>(); // Output FE Meshes -> The teee path refers to the surface number that originated that mesh
-        DataTree<Vector3d> _meshdisplacements = new DataTree<Vector3d>();
-        DataTree<Mesh> _deformedMeshes = new DataTree<Mesh>();
-        DataTree<Point3d> _controlPoints = new DataTree<Point3d>(); // For member displacements
-        DataTree<Vector3d> _memberdisplacements = new DataTree<Vector3d>();
-        DataTree<Curve> _deformedMembers = new DataTree<Curve>();
+        //// when the method is called again.
+        //List<RFNode> rfNodes = new List<RFNode>(); // Calculation results
+        //DataTree<Mesh> _feMeshes = new DataTree<Mesh>(); // Output FE Meshes -> The teee path refers to the surface number that originated that mesh
+        //DataTree<Vector3d> _meshdisplacements = new DataTree<Vector3d>();
+        //DataTree<Mesh> _deformedMeshes = new DataTree<Mesh>();
+        //DataTree<Point3d> _controlPoints = new DataTree<Point3d>(); // For member displacements
+        //DataTree<Vector3d> _memberdisplacements = new DataTree<Vector3d>();
+        //DataTree<Curve> _deformedMembers = new DataTree<Curve>();
 
         //private List<string> _loadCases = new List<string>();
         //private List<string> _loadCombos = new List<string>();
@@ -38,10 +38,10 @@ namespace Parametric_FEM_Toolbox.GUI
         private int _countCases = 0;
         private int _countCombos = 0;
         private int _countRcombos = 0;
-        ICalculation _results = null;
-        IFeMesh _rfemMesh = null;
-        IResults _lcresults = null;
-        IModelData _saveddata = null;
+        //ICalculation _results = null;
+        //IFeMesh _rfemMesh = null;
+        //IResults _lcresults = null;
+        //IModelData _saveddata = null;
         //NodalDeformations[] _deformations = null;
 
 
@@ -218,9 +218,9 @@ namespace Parametric_FEM_Toolbox.GUI
 
             // RFEM variables
             var modelName = "";
-            IModel model = null;
-            IModelData data = null;
-            ILoads loads = null;
+            //IModel model = null;
+            //IModelData data = null;
+            //ILoads loads = null;
 
             // Output message
             var msg = new List<string>();
@@ -231,90 +231,90 @@ namespace Parametric_FEM_Toolbox.GUI
             DA.GetData(0, ref run);
             DA.GetData(1, ref scale);
 
-            // Do stuff
-            if (run)
-            {
-                if (!DA.GetData(3, ref modelName))
-                {
-                    Component_GetData.ConnectRFEM(ref model, ref data);
-                }
-                else
-                {
-                    Component_GetData.ConnectRFEM(modelName, ref model, ref data);
-                }
-                _saveddata = data;
-                try
-                {
-                    // Get deformtions 
-                    _resetLC = true;
-                    // Get loads
-                    Component_GetData.GetLoadsFromRFEM(model, ref loads);
-                    // Get calculation results
-                    _results = model.GetCalculation();
-                    var errors = _results.CalculateAll();
-                    if (errors != null)
-                    {
-                        msg.AddRange(errors.Select(x => x.Description));
-                    }                    
-                    // Update load cases and combos to display in dropdown menu
-                    loads.GetLoadCasesAndCombos(ref _lCasesAndCombos, ref _countCases, ref _countCombos, ref _countRcombos);
-                    updateDropDownMenu(_lCasesAndCombos);
-                    // Get Fe Meshes from RFEM
-                    _rfemMesh = _results.GetFeMesh();
-                    _feMeshes = CreateFEMeshes(ref msg);
-                    // _controlPoints = CreateControlPoints(ref msg); -> Obtained with displacements
-                }
-                catch (Exception ex)
-                {
-                    // Clear output!!!
-                    _saveddata = null;
-                    _rfemMesh = null;
-                    _results = null;
-                    _lcresults = null;
-                    _feMeshes.Clear();
-                    _meshdisplacements.Clear();
-                    _deformedMeshes.Clear();
-                    _controlPoints.Clear();
-                    _memberdisplacements.Clear();
-                    _deformedMembers.Clear();
-                    throw ex;
-                }
-                Component_GetData.DisconnectRFEM(ref model, ref data);
-            }
-            // Get results to display
-            if (_loadDrop.Items.Count > 0 && _resetLC && msg.Count==0)
-            {
-                int no = Int16.Parse(_loadDrop.Items[_loadDrop.Value].name.Split(' ')[1]);
-                if (_loadDrop.Value < _countCases)
-                {
-                    _lcresults = _results.GetResultsInFeNodes(LoadingType.LoadCaseType, no);
-                }
-                else if (_loadDrop.Value < _countCases + _countCombos)
-                {
-                    _lcresults = _results.GetResultsInFeNodes(LoadingType.LoadCombinationType, no);
-                }
-                else if (_loadDrop.Value < _countCases + _countCombos + _countRcombos)
-                {
-                    _lcresults = _results.GetResultsInFeNodes(LoadingType.ResultCombinationType, no);
-                }
-                else
-                {
-                    msg.Add("Load case or combo not found");
-                }
-                // Get deformations
-                _meshdisplacements = GetMeshDisplacements(ref msg);
-                _memberdisplacements = GetMemberDisplacements(ref msg);
-                // Set _resetLC to false again
-                _resetLC = false;
-            }
+            //// Do stuff
+            //if (run)
+            //{
+            //    if (!DA.GetData(3, ref modelName))
+            //    {
+            //        Component_GetData.ConnectRFEM(ref model, ref data);
+            //    }
+            //    else
+            //    {
+            //        Component_GetData.ConnectRFEM(modelName, ref model, ref data);
+            //    }
+            //    _saveddata = data;
+            //    try
+            //    {
+            //        // Get deformtions 
+            //        _resetLC = true;
+            //        // Get loads
+            //        Component_GetData.GetLoadsFromRFEM(model, ref loads);
+            //        // Get calculation results
+            //        _results = model.GetCalculation();
+            //        var errors = _results.CalculateAll();
+            //        if (errors != null)
+            //        {
+            //            msg.AddRange(errors.Select(x => x.Description));
+            //        }                    
+            //        // Update load cases and combos to display in dropdown menu
+            //        loads.GetLoadCasesAndCombos(ref _lCasesAndCombos, ref _countCases, ref _countCombos, ref _countRcombos);
+            //        updateDropDownMenu(_lCasesAndCombos);
+            //        // Get Fe Meshes from RFEM
+            //        _rfemMesh = _results.GetFeMesh();
+            //        _feMeshes = CreateFEMeshes(ref msg);
+            //        // _controlPoints = CreateControlPoints(ref msg); -> Obtained with displacements
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // Clear output!!!
+            //        _saveddata = null;
+            //        _rfemMesh = null;
+            //        _results = null;
+            //        _lcresults = null;
+            //        _feMeshes.Clear();
+            //        _meshdisplacements.Clear();
+            //        _deformedMeshes.Clear();
+            //        _controlPoints.Clear();
+            //        _memberdisplacements.Clear();
+            //        _deformedMembers.Clear();
+            //        throw ex;
+            //    }
+            //    Component_GetData.DisconnectRFEM(ref model, ref data);
+            //}
+            //// Get results to display
+            //if (_loadDrop.Items.Count > 0 && _resetLC && msg.Count==0)
+            //{
+            //    int no = Int16.Parse(_loadDrop.Items[_loadDrop.Value].name.Split(' ')[1]);
+            //    if (_loadDrop.Value < _countCases)
+            //    {
+            //        _lcresults = _results.GetResultsInFeNodes(LoadingType.LoadCaseType, no);
+            //    }
+            //    else if (_loadDrop.Value < _countCases + _countCombos)
+            //    {
+            //        _lcresults = _results.GetResultsInFeNodes(LoadingType.LoadCombinationType, no);
+            //    }
+            //    else if (_loadDrop.Value < _countCases + _countCombos + _countRcombos)
+            //    {
+            //        _lcresults = _results.GetResultsInFeNodes(LoadingType.ResultCombinationType, no);
+            //    }
+            //    else
+            //    {
+            //        msg.Add("Load case or combo not found");
+            //    }
+            //    // Get deformations
+            //    _meshdisplacements = GetMeshDisplacements(ref msg);
+            //    _memberdisplacements = GetMemberDisplacements(ref msg);
+            //    // Set _resetLC to false again
+            //    _resetLC = false;
+            //}
 
-            // Get output
-            _deformedMeshes = GetDeformedMeshes(scale, ref msg);
-            _deformedMembers = GetDeformedMembers(scale, ref msg);
+            //// Get output
+            //_deformedMeshes = GetDeformedMeshes(scale, ref msg);
+            //_deformedMembers = GetDeformedMembers(scale, ref msg);
 
-            // Assign GH Output
-            DA.SetDataTree(0, _deformedMembers);
-            DA.SetDataTree(1, _deformedMeshes);
+            //// Assign GH Output
+            //DA.SetDataTree(0, _deformedMembers);
+            //DA.SetDataTree(1, _deformedMeshes);
 
             if (msg.Count != 0)
             {
@@ -322,89 +322,89 @@ namespace Parametric_FEM_Toolbox.GUI
             }
         }
 
-        private DataTree<Mesh> CreateFEMeshes(ref List<string> msg)
-        {
-            var feMeshes = new DataTree<Mesh>();
-            // Create fe mesh from each surface element
-            foreach (var sfc in _saveddata.GetSurfaces())
-            {
-                // Get surface number
-                var no = sfc.No;
-                // Create mesh -> add vertices and faces
-                var feMesh = new Mesh();
-                var fesurfacenodes = _rfemMesh.GetSurfaceNodes(no, ItemAt.AtNo).OrderBy(o => o.No).ToList(); // Sort nodes so there are no errors when applying displacements
-                var dicNodes = new Dictionary<int, int>(); // We need to save the node index numbers in order to define the mesh faces later
-                for (int i = 0; i < fesurfacenodes.Count; i++)
-                {
-                    var node_location = new Point3d(fesurfacenodes[i].X, fesurfacenodes[i].Y, fesurfacenodes[i].Z);
-                    feMesh.Vertices.Add(node_location);
-                    dicNodes.Add(fesurfacenodes[i].No, i);
-                }
-                var fe2delements = _rfemMesh.GetSurfaceElements(no, ItemAt.AtNo);
-                foreach (var element in fe2delements)
-                {
-                    var node_numbers = element.NodeNumbers;
-                    if (node_numbers.Length == 4 && node_numbers[3] != 0)
-                    {
-                        dicNodes.TryGetValue(node_numbers[0], out int node0);
-                        dicNodes.TryGetValue(node_numbers[1], out int node1);
-                        dicNodes.TryGetValue(node_numbers[2], out int node2);
-                        dicNodes.TryGetValue(node_numbers[3], out int node3);
-                        feMesh.Faces.AddFace(node0, node1, node2, node3);
-                    }
-                    else if (node_numbers.Length == 4 && node_numbers[3] == 0)
-                    {
-                        dicNodes.TryGetValue(node_numbers[0], out int node0);
-                        dicNodes.TryGetValue(node_numbers[1], out int node1);
-                        dicNodes.TryGetValue(node_numbers[2], out int node2);
-                        feMesh.Faces.AddFace(node0, node1, node2);
-                    }
-                    else
-                    {
-                        msg.Add($"Element {element.No} not imported.");
-                    }
-                }
-                // Add mesh to tree
-                var gh_path = new GH_Path(no);
-                feMeshes.Add(feMesh, gh_path);
-            }
-            return feMeshes;
-        }
+        //private DataTree<Mesh> CreateFEMeshes(ref List<string> msg)
+        //{
+        //    var feMeshes = new DataTree<Mesh>();
+        //    // Create fe mesh from each surface element
+        //    foreach (var sfc in _saveddata.GetSurfaces())
+        //    {
+        //        // Get surface number
+        //        var no = sfc.No;
+        //        // Create mesh -> add vertices and faces
+        //        var feMesh = new Mesh();
+        //        var fesurfacenodes = _rfemMesh.GetSurfaceNodes(no, ItemAt.AtNo).OrderBy(o => o.No).ToList(); // Sort nodes so there are no errors when applying displacements
+        //        var dicNodes = new Dictionary<int, int>(); // We need to save the node index numbers in order to define the mesh faces later
+        //        for (int i = 0; i < fesurfacenodes.Count; i++)
+        //        {
+        //            var node_location = new Point3d(fesurfacenodes[i].X, fesurfacenodes[i].Y, fesurfacenodes[i].Z);
+        //            feMesh.Vertices.Add(node_location);
+        //            dicNodes.Add(fesurfacenodes[i].No, i);
+        //        }
+        //        var fe2delements = _rfemMesh.GetSurfaceElements(no, ItemAt.AtNo);
+        //        foreach (var element in fe2delements)
+        //        {
+        //            var node_numbers = element.NodeNumbers;
+        //            if (node_numbers.Length == 4 && node_numbers[3] != 0)
+        //            {
+        //                dicNodes.TryGetValue(node_numbers[0], out int node0);
+        //                dicNodes.TryGetValue(node_numbers[1], out int node1);
+        //                dicNodes.TryGetValue(node_numbers[2], out int node2);
+        //                dicNodes.TryGetValue(node_numbers[3], out int node3);
+        //                feMesh.Faces.AddFace(node0, node1, node2, node3);
+        //            }
+        //            else if (node_numbers.Length == 4 && node_numbers[3] == 0)
+        //            {
+        //                dicNodes.TryGetValue(node_numbers[0], out int node0);
+        //                dicNodes.TryGetValue(node_numbers[1], out int node1);
+        //                dicNodes.TryGetValue(node_numbers[2], out int node2);
+        //                feMesh.Faces.AddFace(node0, node1, node2);
+        //            }
+        //            else
+        //            {
+        //                msg.Add($"Element {element.No} not imported.");
+        //            }
+        //        }
+        //        // Add mesh to tree
+        //        var gh_path = new GH_Path(no);
+        //        feMeshes.Add(feMesh, gh_path);
+        //    }
+        //    return feMeshes;
+        //}
 
-        private DataTree<Vector3d> GetMeshDisplacements(ref List<string> msg)
-        {
-            var oDisplacements = new DataTree<Vector3d>();
-            // Save defoirmation vectors into a tree
-            var surfaceResults = _lcresults.GetSurfacesDeformations(false).OrderBy(o => o.LocationNo); // Sort according to nodes so there are no errors when applying displacements
-            foreach (var result in surfaceResults)
-            {
-                var gh_path = new GH_Path(result.SurfaceNo, (int)result.Type);
-                var displacement = new Vector3d(result.Displacements.ToPoint3d());
-                oDisplacements.Add(displacement, gh_path);
-            }
-            return oDisplacements;
-        }
+        //private DataTree<Vector3d> GetMeshDisplacements(ref List<string> msg)
+        //{
+        //    var oDisplacements = new DataTree<Vector3d>();
+        //    // Save defoirmation vectors into a tree
+        //    var surfaceResults = _lcresults.GetSurfacesDeformations(false).OrderBy(o => o.LocationNo); // Sort according to nodes so there are no errors when applying displacements
+        //    foreach (var result in surfaceResults)
+        //    {
+        //        var gh_path = new GH_Path(result.SurfaceNo, (int)result.Type);
+        //        var displacement = new Vector3d(result.Displacements.ToPoint3d());
+        //        oDisplacements.Add(displacement, gh_path);
+        //    }
+        //    return oDisplacements;
+        //}
 
-        private DataTree<Mesh> GetDeformedMeshes(double scale, ref List<string> msg)
-        {
-            var oMeshes = new DataTree<Mesh>();
-            // Same tree structure as displacements
-            foreach (var path in _meshdisplacements.Paths)
-            {
-                var gh_path = new GH_Path(path);
-                var mesh_path = new GH_Path(path.Indices[0]);
-                // Get fe mesh as starting mesh
-                var mesh = _feMeshes.Branch(mesh_path)[0].DuplicateMesh();
-                // Move FE Nodes according to displacements
-                for (int i = 0; i < mesh.Vertices.Count; i++)
-                {
-                    mesh.Vertices[i] += (Point3f)(Point3d)(scale * _meshdisplacements.Branch(path)[i]); // -_-
-                }
-                // Add mesh to tree
-                oMeshes.Add(mesh, gh_path);
-            }
-            return oMeshes;
-        }
+        //private DataTree<Mesh> GetDeformedMeshes(double scale, ref List<string> msg)
+        //{
+        //    var oMeshes = new DataTree<Mesh>();
+        //    // Same tree structure as displacements
+        //    foreach (var path in _meshdisplacements.Paths)
+        //    {
+        //        var gh_path = new GH_Path(path);
+        //        var mesh_path = new GH_Path(path.Indices[0]);
+        //        // Get fe mesh as starting mesh
+        //        var mesh = _feMeshes.Branch(mesh_path)[0].DuplicateMesh();
+        //        // Move FE Nodes according to displacements
+        //        for (int i = 0; i < mesh.Vertices.Count; i++)
+        //        {
+        //            mesh.Vertices[i] += (Point3f)(Point3d)(scale * _meshdisplacements.Branch(path)[i]); // -_-
+        //        }
+        //        // Add mesh to tree
+        //        oMeshes.Add(mesh, gh_path);
+        //    }
+        //    return oMeshes;
+        //}
 
         //private DataTree<Point3d> CreateControlPoints(ref List<string> msg)
         //{
@@ -421,59 +421,59 @@ namespace Parametric_FEM_Toolbox.GUI
         //    return oControlPoints;
         //}
 
-        private DataTree<Vector3d> GetMemberDisplacements(ref List<string> msg)
-        {
-            // Get control points
-            _controlPoints.Clear();
-            var rfmembers = Component_GetData.GetRFMembers(_saveddata.GetMembers().ToList(), _saveddata);
-            // Save defoirmation vectors into a tree;
-            var oDisplacements = new DataTree<Vector3d>();
-            foreach (var member in rfmembers)
-            {
-                // Add also control points. We are just going to get one set of control points for each curve regardless thne result type                
-                var pts_path = new GH_Path(member.No);
-                _controlPoints.RemovePath(pts_path);
-                var baseline = member.BaseLine.ToCurve();
-                // Get deformations
-                var memberResults = _lcresults.GetMemberDeformations(member.No, ItemAt.AtNo, MemberAxesType.GlobalAxes); // We can't sort this list                
-                var valueType = memberResults[0].Type; // Get deformation types to avoid duplicate control points
-                foreach (var result in memberResults)
-                {
-                    var gh_path = new GH_Path(member.No, (int)result.Type);
-                    var displacement = new Vector3d(result.Displacements.ToPoint3d());
-                    oDisplacements.Add(displacement, gh_path);
-                    // Get control points
-                    if (result.Type == valueType)
-                    {
-                        _controlPoints.Add(baseline.PointAtNormalizedLength(Math.Min(result.Location / baseline.GetLength(), 1.0)), pts_path);
-                    }                    
-                }               
-            }
-            return oDisplacements;
-        }
+        //private DataTree<Vector3d> GetMemberDisplacements(ref List<string> msg)
+        //{
+        //    // Get control points
+        //    _controlPoints.Clear();
+        //    var rfmembers = Component_GetData.GetRFMembers(_saveddata.GetMembers().ToList(), _saveddata);
+        //    // Save defoirmation vectors into a tree;
+        //    var oDisplacements = new DataTree<Vector3d>();
+        //    foreach (var member in rfmembers)
+        //    {
+        //        // Add also control points. We are just going to get one set of control points for each curve regardless thne result type                
+        //        var pts_path = new GH_Path(member.No);
+        //        _controlPoints.RemovePath(pts_path);
+        //        var baseline = member.BaseLine.ToCurve();
+        //        // Get deformations
+        //        var memberResults = _lcresults.GetMemberDeformations(member.No, ItemAt.AtNo, MemberAxesType.GlobalAxes); // We can't sort this list                
+        //        var valueType = memberResults[0].Type; // Get deformation types to avoid duplicate control points
+        //        foreach (var result in memberResults)
+        //        {
+        //            var gh_path = new GH_Path(member.No, (int)result.Type);
+        //            var displacement = new Vector3d(result.Displacements.ToPoint3d());
+        //            oDisplacements.Add(displacement, gh_path);
+        //            // Get control points
+        //            if (result.Type == valueType)
+        //            {
+        //                _controlPoints.Add(baseline.PointAtNormalizedLength(Math.Min(result.Location / baseline.GetLength(), 1.0)), pts_path);
+        //            }                    
+        //        }               
+        //    }
+        //    return oDisplacements;
+        //}
 
-        private DataTree<Curve> GetDeformedMembers(double scale, ref List<string> msg)
-        {
-            var oCurves = new DataTree<Curve>();
-            // Same tree structure as displacements
-            foreach (var path in _memberdisplacements.Paths)
-            {
-                var gh_path = new GH_Path(path);
-                var member_path = new GH_Path(path.Indices[0]);
-                // Get deformed control points
-                var ctrlPoints = _controlPoints.Branch(member_path);
-                var deformations = _memberdisplacements.Branch(path);
-                var deformedPoints = new List<Point3d>();
-                for (int i = 0; i < ctrlPoints.Count; i++)
-                {
-                    deformedPoints.Add(new Point3d(ctrlPoints[i] + scale * deformations[i]));
-                }
-                // Add curve to tree
-                var memberShape = Curve.CreateControlPointCurve(deformedPoints);
-                oCurves.Add(memberShape, gh_path);
-            }
-            return oCurves;
-        }
+        //private DataTree<Curve> GetDeformedMembers(double scale, ref List<string> msg)
+        //{
+        //    var oCurves = new DataTree<Curve>();
+        //    // Same tree structure as displacements
+        //    foreach (var path in _memberdisplacements.Paths)
+        //    {
+        //        var gh_path = new GH_Path(path);
+        //        var member_path = new GH_Path(path.Indices[0]);
+        //        // Get deformed control points
+        //        var ctrlPoints = _controlPoints.Branch(member_path);
+        //        var deformations = _memberdisplacements.Branch(path);
+        //        var deformedPoints = new List<Point3d>();
+        //        for (int i = 0; i < ctrlPoints.Count; i++)
+        //        {
+        //            deformedPoints.Add(new Point3d(ctrlPoints[i] + scale * deformations[i]));
+        //        }
+        //        // Add curve to tree
+        //        var memberShape = Curve.CreateControlPointCurve(deformedPoints);
+        //        oCurves.Add(memberShape, gh_path);
+        //    }
+        //    return oCurves;
+        //}
 
         /// <summary>
         /// The Exposure property controls where in the panel a component icon 

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -56,23 +56,23 @@ namespace Parametric_FEM_Toolbox.GUI
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
 
-            // Input
-            var inGH = new GH_RFEM();
-            if (!DA.GetData(0, ref inGH))
-            {
-                return;
-            }
-            var rfNodalLoad = (RFNodalLoad)inGH.Value;
+            //// Input
+            //var inGH = new GH_RFEM();
+            //if (!DA.GetData(0, ref inGH))
+            //{
+            //    return;
+            //}
+            //var rfNodalLoad = (RFNodalLoad)inGH.Value;
 
-            // Output
-            DA.SetDataList(0, rfNodalLoad.Location);
-            DA.SetData(1, rfNodalLoad.No);
-            DA.SetData(2, rfNodalLoad.LoadCase);
-            DA.SetData(3, rfNodalLoad.Force);
-            DA.SetData(4, rfNodalLoad.Moment);
-            DA.SetData(5, rfNodalLoad.Comment);
-            DA.SetData(6, rfNodalLoad.NodeList);
-            DA.SetData(7, rfNodalLoad.LoadDefType);
+            //// Output
+            //DA.SetDataList(0, rfNodalLoad.Location);
+            //DA.SetData(1, rfNodalLoad.No);
+            //DA.SetData(2, rfNodalLoad.LoadCase);
+            //DA.SetData(3, rfNodalLoad.Force);
+            //DA.SetData(4, rfNodalLoad.Moment);
+            //DA.SetData(5, rfNodalLoad.Comment);
+            //DA.SetData(6, rfNodalLoad.NodeList);
+            //DA.SetData(7, rfNodalLoad.LoadDefType);
 
         }
     }

@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using Parametric_FEM_Toolbox.UIWidgets;
 using Parametric_FEM_Toolbox.Utilities;
 using Parametric_FEM_Toolbox.HelperLibraries;
-using Dlubal.RFEM5;
-using Parametric_FEM_Toolbox.RFEM;
+
+//
 
 namespace Parametric_FEM_Toolbox.GUI
 {
@@ -62,9 +62,10 @@ namespace Parametric_FEM_Toolbox.GUI
             gH_ExtendableMenu.Name = "Advanced";
             gH_ExtendableMenu.Collapse();
             unit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Index related to the Line Hinge", GH_ParamAccess.item);
+            unit.RegisterInputParam(new Param_Integer(), "LineNo", "LineNo", "Line Index related to the Line Hinge", GH_ParamAccess.item);
             unit.Inputs[10].Parameter.Optional = true;
-            unit.RegisterInputParam(new Param_Integer(), "Side", "Side", UtilLibrary.DescriptionRFTypes(typeof(HingeSideType)), GH_ParamAccess.item);
-            unit.Inputs[11].EnumInput = UtilLibrary.ListRFTypes(typeof(HingeSideType));
+            //unit.RegisterInputParam(new Param_Integer(), "Side", "Side", UtilLibrary.DescriptionRFTypes(typeof(HingeSideType)), GH_ParamAccess.item);
+            //unit.Inputs[11].EnumInput = UtilLibrary.ListRFTypes(typeof(HingeSideType));
             unit.Inputs[11].Parameter.Optional = true;
             gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[10]);
             gH_ExtendableMenu.RegisterInputPlug(unit.Inputs[11]);
@@ -91,113 +92,113 @@ namespace Parametric_FEM_Toolbox.GUI
         {
             msg = "";
             level = GH_RuntimeMessageLevel.Blank;
-            //var line = new LineCurve();
-            Curve inCurve = null;
-            var noIndex = 0;
-            var comment = "";
-            var rfHinge = new RFLineHinge();
-            var inRFEM = new GH_RFEM();
-            var mod = false;
-            var del = false;
-            var tx = 0.0;
-            var ty = 0.0;
-            var tz = 0.0;
-            var rx = 0.0;
-            var ry = 0.0;
-            var rz = 0.0;
-            var lineNo = 0;
-            var sfcNo = 0;
-            var side = 0;
-            //int newNo = 0;
+            ////var line = new LineCurve();
+            //Curve inCurve = null;
+            //var noIndex = 0;
+            //var comment = "";
+            //var rfHinge = new RFLineHinge();
+            //var inRFEM = new GH_RFEM();
+            //var mod = false;
+            //var del = false;
+            //var tx = 0.0;
+            //var ty = 0.0;
+            //var tz = 0.0;
+            //var rx = 0.0;
+            //var ry = 0.0;
+            //var rz = 0.0;
+            //var lineNo = 0;
+            //var sfcNo = 0;
+            //var side = 0;
+            ////int newNo = 0;
 
 
-            if (DA.GetData(12, ref inRFEM))
-            {
-                rfHinge = new RFLineHinge((RFLineHinge)inRFEM.Value);
-                if (DA.GetData(0, ref inCurve))
-                {
-                    var myRFLine = new RFLine();
-                    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                    rfHinge = new RFLineHinge(rfHinge, myRFLine);
-                }
-                if (DA.GetData(10, ref lineNo))
-                {
-                    rfHinge.LineNo = lineNo;
-                }
-            }
-            else if (DA.GetData(0, ref inCurve))
-            {
-                var myRFLine = new RFLine();
-                Component_RFLine.SetGeometry(inCurve, ref myRFLine);
-                rfHinge = new RFLineHinge(new RFLineHinge(), myRFLine);
-            }
-            else if (DA.GetData(10, ref lineNo))
-            {
-                rfHinge.LineNo = lineNo;
-            }
-            else
-            {
-                msg = "Insufficient input parameters. Provide either Input Curve or Line Number or existing RFLineHinge Object. ";
-                level = GH_RuntimeMessageLevel.Warning;
-                return;
-            }
-            if (DA.GetData(13, ref mod))
-            {
-                rfHinge.ToModify = mod;
-            }
-            if (DA.GetData(14, ref del))
-            {
-                rfHinge.ToDelete = del;
-            }
-            if (DA.GetData(1, ref noIndex))
-            {
-                rfHinge.No = noIndex;
-            }
-            if (DA.GetData(2, ref sfcNo))
-            {
-                rfHinge.SfcNo = sfcNo;
-            }
-            if (DA.GetData(9, ref comment))
-            {
-                rfHinge.Comment = comment;
-            }
-            if (DA.GetData(3, ref tx))
-            {
-                rfHinge.Tx = tx;
-            }
-            if (DA.GetData(4, ref ty))
-            {
-                rfHinge.Ty = ty;
-            }
-            if (DA.GetData(5, ref tz))
-            {
-                rfHinge.Tz = tz;
-            }
-            if (DA.GetData(6, ref rx))
-            {
-                rfHinge.Rx = rx;
-            }
-            if (DA.GetData(7, ref ry))
-            {
-                rfHinge.Ry = ry;
-            }
-            if (DA.GetData(8, ref rz))
-            {
-                rfHinge.Rz = rz;
-            }
+            //if (DA.GetData(12, ref inRFEM))
+            //{
+            //    rfHinge = new RFLineHinge((RFLineHinge)inRFEM.Value);
+            //    if (DA.GetData(0, ref inCurve))
+            //    {
+            //        var myRFLine = new RFLine();
+            //        Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //        rfHinge = new RFLineHinge(rfHinge, myRFLine);
+            //    }
+            //    if (DA.GetData(10, ref lineNo))
+            //    {
+            //        rfHinge.LineNo = lineNo;
+            //    }
+            //}
+            //else if (DA.GetData(0, ref inCurve))
+            //{
+            //    var myRFLine = new RFLine();
+            //    Component_RFLine.SetGeometry(inCurve, ref myRFLine);
+            //    rfHinge = new RFLineHinge(new RFLineHinge(), myRFLine);
+            //}
+            //else if (DA.GetData(10, ref lineNo))
+            //{
+            //    rfHinge.LineNo = lineNo;
+            //}
+            //else
+            //{
+            //    msg = "Insufficient input parameters. Provide either Input Curve or Line Number or existing RFLineHinge Object. ";
+            //    level = GH_RuntimeMessageLevel.Warning;
+            //    return;
+            //}
+            //if (DA.GetData(13, ref mod))
+            //{
+            //    rfHinge.ToModify = mod;
+            //}
+            //if (DA.GetData(14, ref del))
+            //{
+            //    rfHinge.ToDelete = del;
+            //}
+            //if (DA.GetData(1, ref noIndex))
+            //{
+            //    rfHinge.No = noIndex;
+            //}
+            //if (DA.GetData(2, ref sfcNo))
+            //{
+            //    rfHinge.SfcNo = sfcNo;
+            //}
+            //if (DA.GetData(9, ref comment))
+            //{
+            //    rfHinge.Comment = comment;
+            //}
+            //if (DA.GetData(3, ref tx))
+            //{
+            //    rfHinge.Tx = tx;
+            //}
+            //if (DA.GetData(4, ref ty))
+            //{
+            //    rfHinge.Ty = ty;
+            //}
+            //if (DA.GetData(5, ref tz))
+            //{
+            //    rfHinge.Tz = tz;
+            //}
+            //if (DA.GetData(6, ref rx))
+            //{
+            //    rfHinge.Rx = rx;
+            //}
+            //if (DA.GetData(7, ref ry))
+            //{
+            //    rfHinge.Ry = ry;
+            //}
+            //if (DA.GetData(8, ref rz))
+            //{
+            //    rfHinge.Rz = rz;
+            //}
 
-            if (DA.GetData(11, ref side))
-            {
-                rfHinge.Side = (HingeSideType)side;
-                if (rfHinge.Side == HingeSideType.UnknownSideType)
-                {
-                    msg = "Hinge Side Type not supported. ";
-                    level = GH_RuntimeMessageLevel.Warning;
-                    return;
-                }
-            }
+            //if (DA.GetData(11, ref side))
+            //{
+            //    rfHinge.Side = (HingeSideType)side;
+            //    if (rfHinge.Side == HingeSideType.UnknownSideType)
+            //    {
+            //        msg = "Hinge Side Type not supported. ";
+            //        level = GH_RuntimeMessageLevel.Warning;
+            //        return;
+            //    }
+            //}
 
-            DA.SetData(0, rfHinge);
+            //DA.SetData(0, rfHinge);
         }
     }
 }
